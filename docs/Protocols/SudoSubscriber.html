@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SudoSubscriber Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Protocol/SudoSubscriber" class="dashAnchor"></a>
+
+    <a title="SudoSubscriber Protocol Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          SudoProfiles 5.4.2 Docs
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">SudoProfiles Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      SudoSubscriber Protocol Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ClientOwnershipProofIssuer.html">ClientOwnershipProofIssuer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultSudoProfilesClient.html">DefaultSudoProfilesClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SudoOperation.html">SudoOperation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles9ApiResultO">ApiResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles06CreateA6ResultO">CreateSudoResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles06DeleteA5ErrorO">DeleteSudoError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles23GetOwnershipProofResultO">GetOwnershipProofResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles10ListOptionO">ListOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles15ListSudosResultO">ListSudosResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles25OwnershipProofIssuerErrorO">OwnershipProofIssuerError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles12RedeemResultO">RedeemResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles16RedeemTokenErrorO">RedeemTokenError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles11S3ApiResultO">S3ApiResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles13S3ClientErrorO">S3ClientError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles16S3DownloadResultO">S3DownloadResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles14S3UploadResultO">S3UploadResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles27SubscriptionConnectionStateO">SubscriptionConnectionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles0A10ChangeTypeO">SudoChangeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles0A14OperationErrorO">SudoOperationError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles0aB11ClientErrorO">SudoProfilesClientError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles06UpdateA5ErrorO">UpdateSudoError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles06UpdateA6ResultO">UpdateSudoResult</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/S3Client.html">S3Client</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/SudoProfilesClient.html">SudoProfilesClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/SudoSubscriber.html">SudoSubscriber</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Claim.html">Claim</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Claim.html#/s:12SudoProfiles5ClaimV10VisibilityO">– Visibility</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Claim.html#/s:12SudoProfiles5ClaimV5ValueO">– Value</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Entitlement.html">Entitlement</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Sudo.html">Sudo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/SudoProfilesClientConfigProvider.html">SudoProfilesClientConfigProvider</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>SudoSubscriber</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">SudoSubscriber</span></code></pre>
+
+                </div>
+              </div>
+            <p>Subscriber for receiving notifications about new, updated or deleted Sudo.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12SudoProfiles0A10SubscriberP11sudoChanged10changeType0D0yAA0a6ChangeG0O_AA0A0VtF"></a>
+                    <a name="//apple_ref/swift/Method/sudoChanged(changeType:sudo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0A10SubscriberP11sudoChanged10changeType0D0yAA0a6ChangeG0O_AA0A0VtF">sudoChanged(changeType:<wbr>sudo:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Notifies the subscriber of a new, updated or deleted Sudo.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">sudoChanged</span><span class="p">(</span><span class="nv">changeType</span><span class="p">:</span> <span class="kt"><a href="../Enums.html#/s:12SudoProfiles0A10ChangeTypeO">SudoChangeType</a></span><span class="p">,</span> <span class="nv">sudo</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>changeType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Change type. Please refer to <code><a href="../Enums.html#/s:12SudoProfiles0A10ChangeTypeO">SudoChangeType</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sudo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New, updated or deleted Sudo.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12SudoProfiles0A10SubscriberP23connectionStatusChanged5stateyAA27SubscriptionConnectionStateO_tF"></a>
+                    <a name="//apple_ref/swift/Method/connectionStatusChanged(state:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0A10SubscriberP23connectionStatusChanged5stateyAA27SubscriptionConnectionStateO_tF">connectionStatusChanged(state:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Notifies the subscriber that the subscription connection state has changed. The subscriber won&rsquo;t be
+notified of Sudo changes until the connection status changes to <code>connected</code>. The subscriber will
+stop receiving Sudo change notifications when the connection state changes to <code>disconnected</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">connectionStatusChanged</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt"><a href="../Enums.html#/s:12SudoProfiles27SubscriptionConnectionStateO">SubscriptionConnectionState</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>state</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Connection state.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2020-04-29)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
