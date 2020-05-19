@@ -148,6 +148,13 @@ public protocol SudoProfilesClient: class {
     /// - Parameter subscriber: Subscriber to notify.
     func subscribe(id: String, changeType: SudoChangeType, subscriber: SudoSubscriber) throws
 
+    /// Subscribes to be notified of new, updated and deleted Sudos. Blob data is not downloaded automatically
+    /// so the caller is expected to use `listSudos` API if they need to access any associated blobs.
+    ///
+    /// - Parameter id: Unique ID to be associated with the subscriber.
+    /// - Parameter subscriber: Subscriber to notify.
+    func subscribe(id: String, subscriber: SudoSubscriber) throws
+
     /// Unsubscribes the specified subscriber so that it no longer receivies notifications about
     ///  new, updated or deleted Sudos.
     ///
@@ -547,6 +554,12 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         try self.graphQLClient.clearCaches(options: .init(clearQueries: true, clearMutations: true, clearSubscriptions: true))
         try self.blobCache.reset()
         self.unsubscribeAll()
+    }
+
+    public func subscribe(id: String, subscriber: SudoSubscriber) throws {
+        try self.subscribe(id: id, changeType: .create, subscriber: subscriber)
+        try self.subscribe(id: id, changeType: .delete, subscriber: subscriber)
+        try self.subscribe(id: id, changeType: .update, subscriber: subscriber)
     }
 
     public func subscribe(id: String, changeType: SudoChangeType, subscriber: SudoSubscriber) throws {
