@@ -187,6 +187,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         // Configuration namespace.
         struct Namespace {
             static let sudoService = "sudoService"
+            static let apiService = "apiService"
             static let identityService = "identityService"
         }
 
@@ -263,7 +264,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
     convenience public init(sudoUserClient: SudoUserClient, blobContainerURL: URL, maxSudos: Int = 10) throws {
         guard let configManager = DefaultSudoConfigManager(),
             let identityServiceConfig = configManager.getConfigSet(namespace: Config.Namespace.identityService),
-            let sudoServiceConfig = configManager.getConfigSet(namespace: Config.Namespace.identityService) else {
+            let apiServiceConfig = configManager.getConfigSet(namespace: Config.Namespace.apiService) else {
             throw SudoProfilesClientError.invalidConfig
         }
 
@@ -272,7 +273,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
             throw SudoProfilesClientError.invalidConfig
         }
 
-        try self.init(config: [Config.Namespace.identityService: identityServiceConfig, Config.Namespace.sudoService: sudoServiceConfig],
+        try self.init(config: [Config.Namespace.identityService: identityServiceConfig, Config.Namespace.apiService: apiServiceConfig],
                       sudoUserClient: sudoUserClient, blobContainerURL: blobContainerURL, maxSudos: maxSudos, graphQLClient: graphQLClient)
     }
 
@@ -303,7 +304,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         self.s3Client = s3Client ?? DefaultS3Client(s3ClientKey: Constants.s3ClientKey)
         self.defaultQuery = ListSudosQuery(limit: maxSudos, nextToken: nil)
 
-        guard let sudoServiceConfig = config[Config.Namespace.sudoService] as? [String: Any],
+        guard let sudoServiceConfig = config[Config.Namespace.apiService] as? [String: Any] ?? config[Config.Namespace.sudoService] as? [String: Any],
             let identityServiceConfig = config[Config.Namespace.identityService] as? [String: Any],
             let configProvider = SudoProfilesClientConfigProvider(config: sudoServiceConfig),
             let region = sudoServiceConfig[Config.SudoService.region] as? String,

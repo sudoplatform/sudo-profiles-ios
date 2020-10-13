@@ -44,7 +44,6 @@
 		D9F16E6622FD490C0055513F /* SudoServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F16E6522FD490C0055513F /* SudoServiceAPI.swift */; };
 		D9F16E6E22FD498E0055513F /* SudoProfilesIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F16E6D22FD498E0055513F /* SudoProfilesIntegrationTests.swift */; };
 		D9F16E7022FD498E0055513F /* SudoProfiles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9971C5822FD299A0077076C /* SudoProfiles.framework */; };
-		D9F52A9723D6DB4C00F47271 /* sudoplatformconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = D9F52A9623D6DB4C00F47271 /* sudoplatformconfig.json */; };
 		D9F52A9923D6E10E00F47271 /* SudoProfilesClientConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F52A9823D6E10E00F47271 /* SudoProfilesClientConfigProvider.swift */; };
 		FE3EDC11EA6B3CD421C2996F /* Pods_SudoProfilesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA21892F577B6F334D2BDE41 /* Pods_SudoProfilesTests.framework */; };
 /* End PBXBuildFile section */
@@ -112,7 +111,6 @@
 		D94644602358198B00F4BCF8 /* DeleteS3Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteS3Object.swift; sourceTree = "<group>"; };
 		D94644622358291200F4BCF8 /* BlobCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlobCache.swift; sourceTree = "<group>"; };
 		D9521CA523C2A94D00D7C0DD /* SudoSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudoSubscriber.swift; sourceTree = "<group>"; };
-		D9616183235ED6B5000CCD4B /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		D991835223CD6D1200848F0A /* OwnershipProofIssuer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnershipProofIssuer.swift; sourceTree = "<group>"; };
 		D99495B423FA162B00D2683C /* Entitlement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entitlement.swift; sourceTree = "<group>"; };
 		D99495B623FA192800D2683C /* RedeemToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemToken.swift; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 		D9F16E6B22FD498E0055513F /* SudoProfilesIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudoProfilesIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F16E6D22FD498E0055513F /* SudoProfilesIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudoProfilesIntegrationTests.swift; sourceTree = "<group>"; };
 		D9F16E6F22FD498E0055513F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D9F52A9623D6DB4C00F47271 /* sudoplatformconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sudoplatformconfig.json; sourceTree = "<group>"; };
 		D9F52A9823D6E10E00F47271 /* SudoProfilesClientConfigProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SudoProfilesClientConfigProvider.swift; sourceTree = "<group>"; };
 		F78FBFBE7E95128E1939E105 /* Pods-SudoProfilesIntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoProfilesIntegrationTests.debug.xcconfig"; path = "Target Support Files/Pods-SudoProfilesIntegrationTests/Pods-SudoProfilesIntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,7 +198,6 @@
 		D931C7B72342D22700932612 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
-				D9F52A9623D6DB4C00F47271 /* sudoplatformconfig.json */,
 				D931C7B82342D22700932612 /* AppDelegate.swift */,
 				D931C7BA2342D22700932612 /* ViewController.swift */,
 				D931C7BC2342D22700932612 /* Main.storyboard */,
@@ -243,7 +239,6 @@
 			children = (
 				D9971C7222FD2A510077076C /* Podfile */,
 				D9971C7322FD2A5B0077076C /* SudoProfiles.podspec */,
-				D9616183235ED6B5000CCD4B /* CHANGELOG.md */,
 				D9971C5A22FD299A0077076C /* SudoProfiles */,
 				D9971C6522FD299A0077076C /* SudoProfilesTests */,
 				D9F16E6C22FD498E0055513F /* SudoProfilesIntegrationTests */,
@@ -465,7 +460,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D931C7C32342D22800932612 /* LaunchScreen.storyboard in Resources */,
-				D9F52A9723D6DB4C00F47271 /* sudoplatformconfig.json in Resources */,
 				D931C7C02342D22800932612 /* Assets.xcassets in Resources */,
 				D931C7BE2342D22700932612 /* Main.storyboard in Resources */,
 			);
