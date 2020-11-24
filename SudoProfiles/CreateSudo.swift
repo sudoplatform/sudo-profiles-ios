@@ -90,8 +90,8 @@ class CreateSudo: SudoOperation {
 
                 if let errorType = error[SudoOperation.SudoServiceError.type] as? String {
                     switch errorType {
-                    case SudoOperation.SudoServiceError.policyError:
-                        self.error = SudoOperationError.policyError
+                    case SudoOperation.SudoServiceError.insufficientEntitlementsError:
+                        self.error = SudoOperationError.insufficientEntitlementsError
                     case SudoOperation.SudoServiceError.serviceError:
                         self.error = SudoOperationError.serviceError
                     default:

@@ -171,7 +171,7 @@
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
       "line": 25,
-      "symbol": "SudoOperationError.policyError",
+      "symbol": "SudoOperationError.insufficientEntitlementsError",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },

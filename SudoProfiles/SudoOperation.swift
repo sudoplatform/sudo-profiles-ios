@@ -11,7 +11,7 @@ import SudoLogging
 ///
 /// - preconditionFailure: One of preconditions of the operation was not met.
 /// - invalidInput: Input to the operation was invalid.
-/// - policyError: Operation failed due to the backend policy error. This maybe due to the user not
+/// - insufficientEntitlementsError: Operation failed due to the backend entitlements error. This maybe due to the user not
 ///     having sufficient entitlements or exceeding some other service limit.
 /// - graphQLError: Sudo service's GraphQL endpoint returned an error.
 /// - serviceError: Indicates that an internal server error caused the operation to fail. The error is
@@ -22,7 +22,7 @@ import SudoLogging
 public enum SudoOperationError: Error, Hashable {
     case preconditionFailure
     case invalidInput
-    case policyError
+    case insufficientEntitlementsError
     case serviceError
     case graphQLError(description: String)
     case fatalError(description: String)
@@ -41,7 +41,7 @@ open class SudoOperation: Operation {
     struct SudoServiceError {
         static let type = "errorType"
         static let serviceError = "sudoplatform.ServiceError"
-        static let policyError = "sudoplatform.PolicyFailed"
+        static let insufficientEntitlementsError = "sudoplatform.InsufficientEntitlementsError"
     }
 
     private struct Constants {
