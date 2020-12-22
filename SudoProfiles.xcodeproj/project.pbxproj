@@ -30,6 +30,7 @@
 		D94644612358198B00F4BCF8 /* DeleteS3Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94644602358198B00F4BCF8 /* DeleteS3Object.swift */; };
 		D94644632358291200F4BCF8 /* BlobCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94644622358291200F4BCF8 /* BlobCache.swift */; };
 		D9521CA623C2A94D00D7C0DD /* SudoSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9521CA523C2A94D00D7C0DD /* SudoSubscriber.swift */; };
+		D95D214C2591636700863345 /* CryptoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D214B2591636700863345 /* CryptoProvider.swift */; };
 		D991835323CD6D1200848F0A /* OwnershipProofIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D991835223CD6D1200848F0A /* OwnershipProofIssuer.swift */; };
 		D99495B523FA162B00D2683C /* Entitlement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99495B423FA162B00D2683C /* Entitlement.swift */; };
 		D99495B723FA192800D2683C /* RedeemToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99495B623FA192800D2683C /* RedeemToken.swift */; };
@@ -111,6 +112,7 @@
 		D94644602358198B00F4BCF8 /* DeleteS3Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteS3Object.swift; sourceTree = "<group>"; };
 		D94644622358291200F4BCF8 /* BlobCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlobCache.swift; sourceTree = "<group>"; };
 		D9521CA523C2A94D00D7C0DD /* SudoSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudoSubscriber.swift; sourceTree = "<group>"; };
+		D95D214B2591636700863345 /* CryptoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoProvider.swift; sourceTree = "<group>"; };
 		D991835223CD6D1200848F0A /* OwnershipProofIssuer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnershipProofIssuer.swift; sourceTree = "<group>"; };
 		D99495B423FA162B00D2683C /* Entitlement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entitlement.swift; sourceTree = "<group>"; };
 		D99495B623FA192800D2683C /* RedeemToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemToken.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				D991835223CD6D1200848F0A /* OwnershipProofIssuer.swift */,
 				D9E7B6F623CE840900EA45DC /* SubscriptionManager.swift */,
 				D99495B423FA162B00D2683C /* Entitlement.swift */,
+				D95D214B2591636700863345 /* CryptoProvider.swift */,
 			);
 			path = SudoProfiles;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				D9F16E6622FD490C0055513F /* SudoServiceAPI.swift in Sources */,
 				D931C7D923432B5F00932612 /* SudoOperation.swift in Sources */,
 				D9971C7522FD2B4B0077076C /* Sudo.swift in Sources */,
+				D95D214C2591636700863345 /* CryptoProvider.swift in Sources */,
 				D9088B8B235C52A300C768E2 /* S3Client.swift in Sources */,
 				D931C7DD23432EA700932612 /* UploadSecureS3Object.swift in Sources */,
 				D9521CA623C2A94D00D7C0DD /* SudoSubscriber.swift in Sources */,

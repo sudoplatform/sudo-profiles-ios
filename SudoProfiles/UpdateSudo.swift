@@ -28,7 +28,7 @@ class UpdateSudo: SudoOperation {
         static let conditionalCheckFailedException = "DynamoDB:ConditionalCheckFailedException"
     }
 
-    private unowned let sudoUserClient: SudoUserClient
+    private unowned let cryptoProvider: CryptoProvider
     private unowned let graphQLClient: AWSAppSyncClient
 
     private let region: String
@@ -40,21 +40,21 @@ class UpdateSudo: SudoOperation {
     /// Initializes an operation to update an existing Sudo.
     ///
     /// - Parameters:
-    ///   - sudoUserClient: sudoUserClient: `SudoUserClient` to use for encryption.
+    ///   - cryptoProvider: `CryptoProvider` to use for encryption.
     ///   - graphQLClient: GraphQL client to use to interact with Sudo service.
     ///   - logger: Logger to use for logging.
     ///   - region: AWS region hosting Sudo service.
     ///   - bucket: Name of S3 bucket to store any blob associated with Sudo.
     ///   - identityId: ID of identity to own the blob in AWS S3.
     ///   - sudo: Sudo to update.
-    init(sudoUserClient: SudoUserClient,
+    init(cryptoProvider: CryptoProvider,
          graphQLClient: AWSAppSyncClient,
          logger: Logger = Logger.sudoProfilesClientLogger,
          region: String,
          bucket: String,
          identityId: String,
          sudo: Sudo) {
-        self.sudoUserClient = sudoUserClient
+        self.cryptoProvider = cryptoProvider
         self.graphQLClient = graphQLClient
         self.region = region
         self.bucket = bucket
@@ -155,8 +155,8 @@ class UpdateSudo: SudoOperation {
     ///   - value: String value of the claim.
     /// - Returns: Secure claim.
     private func createSecureClaim(name: String, value: String) throws -> SecureClaimInput {
-        let keyId = try self.sudoUserClient.getSymmetricKeyId()
-        let encrypted = try self.sudoUserClient.encrypt(keyId: keyId, algorithm: SymmetricKeyEncryptionAlgorithm.aesCBCPKCS7Padding, data: value.data(using: .utf8)!)
+        let keyId = try self.cryptoProvider.getSymmetricKeyId()
+        let encrypted = try self.cryptoProvider.encrypt(keyId: keyId, algorithm: SymmetricKeyEncryptionAlgorithm.aesCBCPKCS7Padding, data: value.data(using: .utf8)!)
         return SecureClaimInput(name: name,
                                 version: 1,
                                 algorithm: SymmetricKeyEncryptionAlgorithm.aesCBCPKCS7Padding.rawValue,
@@ -171,7 +171,7 @@ class UpdateSudo: SudoOperation {
     ///   - key: Object key.
     /// - Returns: Secure S3 object.
     private func createSecureS3Object(name: String, key: String) throws -> SecureS3ObjectInput {
-        let keyId = try self.sudoUserClient.getSymmetricKeyId()
+        let keyId = try self.cryptoProvider.getSymmetricKeyId()
         return SecureS3ObjectInput(name: name,
                                    version: 1,
                                    algorithm: SymmetricKeyEncryptionAlgorithm.aesCBCPKCS7Padding.rawValue,

@@ -101,7 +101,7 @@ class BlobCache {
     ///
     /// - Parameter url: Cache entry URL.
     func remove(url: URL) throws {
-        guard self.containerURL == url.deletingLastPathComponent() else {
+        guard self.containerURL.standardizedFileURL == url.deletingLastPathComponent().standardizedFileURL else {
             return
         }
 
@@ -130,7 +130,7 @@ class BlobCache {
     /// - Parameter url: Cache entry URL.
     /// - Returns: Cache entry.
     func get(url: URL) -> Entry? {
-        guard self.containerURL == url.deletingLastPathComponent() else {
+        guard self.containerURL.standardizedFileURL == url.deletingLastPathComponent().standardizedFileURL else {
             return nil
         }
 

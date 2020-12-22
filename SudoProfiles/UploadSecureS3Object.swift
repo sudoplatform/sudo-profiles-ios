@@ -16,7 +16,7 @@ class UploadSecureS3Object: SudoOperation {
         static let contentType = "binary/octet-stream"
     }
 
-    private unowned let sudoUserClient: SudoUserClient
+    private unowned let cryptoProvider: CryptoProvider
     private unowned let s3Client: S3Client
     private unowned let blobCache: BlobCache
 
@@ -36,7 +36,7 @@ class UploadSecureS3Object: SudoOperation {
     ///   - bucket: Name of S3 bucket to store the blob.
     ///   - identityId: ID of identity to own the S3 object.
     ///   - objectId: Unique ID to be associated with the upload blob.
-    init(sudoUserClient: SudoUserClient,
+    init(cryptoProvider: CryptoProvider,
          s3Client: S3Client,
          blobCache: BlobCache,
          logger: Logger = Logger.sudoProfilesClientLogger,
@@ -44,7 +44,7 @@ class UploadSecureS3Object: SudoOperation {
          bucket: String,
          identityId: String,
          objectId: String) {
-        self.sudoUserClient = sudoUserClient
+        self.cryptoProvider = cryptoProvider
         self.s3Client = s3Client
         self.blobCache = blobCache
         self.region = region
@@ -58,7 +58,7 @@ class UploadSecureS3Object: SudoOperation {
         // Retrieve the symmetric key ID required for encryption.
         let keyId: String
         do {
-            keyId = try self.sudoUserClient.getSymmetricKeyId()
+            keyId = try self.cryptoProvider.getSymmetricKeyId()
         } catch {
             self.logger.error("Failed to retrieve symmetric key: \(error)")
             self.error = SudoOperationError.preconditionFailure
@@ -76,7 +76,7 @@ class UploadSecureS3Object: SudoOperation {
         do {
             // Load the data from the cache and encrypt it.
             let data = try cacheEntry.load()
-            encryptedS3Data = try self.sudoUserClient.encrypt(keyId: keyId, algorithm: .aesCBCPKCS7Padding, data: data)
+            encryptedS3Data = try self.cryptoProvider.encrypt(keyId: keyId, algorithm: .aesCBCPKCS7Padding, data: data)
         } catch {
             self.error = error
             return self.done()

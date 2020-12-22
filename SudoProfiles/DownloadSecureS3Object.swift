@@ -12,7 +12,7 @@ import SudoLogging
 /// Dowloads an encrypted blob from AWS S3.
 class DownloadSecureS3Object: SudoOperation {
 
-    private unowned let sudoUserClient: SudoUserClient
+    private unowned let cryptoProvider: CryptoProvider
     private unowned let s3Client: S3Client
     private unowned let blobCache: BlobCache
 
@@ -25,7 +25,7 @@ class DownloadSecureS3Object: SudoOperation {
     /// Initializes an operation to download an encrypted blob from AWS S3.
     ///
     /// - Parameters:
-    ///   - sudoUserClient: `SudoUserClient` to use for decryption.
+    ///   - cryptoProvider: `CryptoProvider` to use for decryption.
     ///   - s3Client: S3 client to use for interacting with AWS S3.
     ///   - blobCache: Local blob cache.
     ///   - logger: Logger to use for logging.
@@ -34,7 +34,7 @@ class DownloadSecureS3Object: SudoOperation {
     ///   - algorithm: Decryption algorithm used for decrypting the blob.
     ///   - keyId: ID of the decryption key used for decrypting the blob.
     ///   - objectId: Unique ID to be associated with the blob.
-    init(sudoUserClient: SudoUserClient,
+    init(cryptoProvider: CryptoProvider,
          s3Client: S3Client,
          blobCache: BlobCache,
          logger: Logger = Logger.sudoProfilesClientLogger,
@@ -43,7 +43,7 @@ class DownloadSecureS3Object: SudoOperation {
          algorithm: String,
          keyId: String,
          objectId: String) {
-        self.sudoUserClient = sudoUserClient
+        self.cryptoProvider = cryptoProvider
         self.s3Client = s3Client
         self.blobCache = blobCache
         self.bucket = bucket
@@ -75,7 +75,7 @@ class DownloadSecureS3Object: SudoOperation {
 
                     do {
                         // Decrypt the downloaded blob and store it in the local cache.
-                        let decryptedData = try self.sudoUserClient.decrypt(keyId: self.keyId, algorithm: algorithm, data: data)
+                        let decryptedData = try self.cryptoProvider.decrypt(keyId: self.keyId, algorithm: algorithm, data: data)
                         try _ = self.blobCache.replace(data: decryptedData, id: self.objectId)
                     } catch {
                         self.logger.error("Failed to decrypt the encrypted blob: \(error)")

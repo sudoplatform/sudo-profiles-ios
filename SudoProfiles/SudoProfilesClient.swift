@@ -33,59 +33,12 @@ public enum SudoProfilesClientError: Error {
 /// Options for controlling the behaviour of `listSudos` API.
 ///
 /// - cacheOnly: returns Sudos from the local cache only. The cache is only updated after listSudos is called with remoteOnly.
-/// - remoteOnly:fetches Sudos from the backend, updates the local cache and returns the fetched Sudos.
+/// - remoteOnly: fetches Sudos from the backend, updates the local cache and returns the fetched Sudos.
+/// - returnCachedElseFetch: returns Sudos from the local cache if cache is not empty otherwise fetch from the backend.
 public enum ListOption {
     case cacheOnly
     case remoteOnly
-}
-
-/// Generic API result. The API can fail with an error or complete successfully.
-///
-/// - success: API completed successfully.
-/// - failure: API failed with an error.
-public enum ApiResult {
-    case success
-    case failure(cause: Error)
-}
-
-/// Result returned by API for creating a new Sudo. The API can fail with an
-/// error or return the newly created Sudo.
-///
-/// - success: Sudo was created successfully.
-/// - failure: Sudo creation failed with an error.
-public enum CreateSudoResult {
-    case success(sudo: Sudo)
-    case failure(cause: Error)
-}
-
-/// Result returned by API for updating a new Sudo. The API can fail with an
-/// error or return the updated Sudo.
-///
-/// - success: Sudo was updated successfully.
-/// - failure: Sudo creation failed with an error.
-public enum UpdateSudoResult {
-    case success(sudo: Sudo)
-    case failure(cause: Error)
-}
-
-/// Result returned by API for listing Sudos owned by the signed in user. The
-/// API can fail with an error or return the list of Sudos owned by the user. 
-///
-/// - success: List of Sudos was retrieved successfully.
-/// - failure: Sudos retrieval failed with an error.
-public enum ListSudosResult {
-    case success(sudos: [Sudo])
-    case failure(cause: Error)
-}
-
-/// Result returned by API for redeem a token to grant additional entitlements.
-/// API can fail with an error or return the resulting entitlements.
-///
-/// - success: Token was redeemeed successfully.
-/// - failure: Token redemption failed with an error.
-public enum RedeemResult {
-    case success(entitlements: [Entitlement])
-    case failure(cause: Error)
+    case returnCachedElseFetch
 }
 
 /// Protocol encapsulating a library functions for managing Sudos in the Sudo service.
@@ -97,7 +50,7 @@ public protocol SudoProfilesClient: class {
     ///   - sudo: Sudo to create.
     ///   - completion: The completion handler to invoke to pass the creation result.
     /// - Throws: `SudoProfilesClientError`
-    func createSudo(sudo: Sudo, completion: @escaping (CreateSudoResult) -> Void) throws
+    func createSudo(sudo: Sudo, completion: @escaping (Swift.Result<Sudo, Error>) -> Void) throws
 
     /// Update a Sudo.
     ///
@@ -105,7 +58,7 @@ public protocol SudoProfilesClient: class {
     ///   - sudo: Sudo to update.
     ///   - completion: The completion handler to invoke to pass the update result.
     /// - Throws: `SudoProfilesClientError`
-    func updateSudo(sudo: Sudo, completion: @escaping (UpdateSudoResult) -> Void) throws
+    func updateSudo(sudo: Sudo, completion: @escaping (Swift.Result<Sudo, Error>) -> Void) throws
 
     /// Deletes a Sudo.
     ///
@@ -113,14 +66,14 @@ public protocol SudoProfilesClient: class {
     ///   - sudo: Sudo to delete.
     ///   - completion: The completion handler to invoke to pass the deletion result.
     /// - Throws: `SudoProfilesClientError`
-    func deleteSudo(sudo: Sudo, completion: @escaping (ApiResult) -> Void) throws
+    func deleteSudo(sudo: Sudo, completion: @escaping (Swift.Result<Void, Error>) -> Void) throws
 
     /// Retrieves all Sudos owned by signed in user.
     ///
     /// - Parameter option: option for controlling the behaviour of this API. Refer to `ListOption` enum.
     /// - Parameter completion: The completion handler to invoke to pass the list result.
     /// - Throws: `SudoProfilesClientError`
-    func listSudos(option: ListOption, completion: @escaping (ListSudosResult) -> Void) throws
+    func listSudos(option: ListOption, completion: @escaping (Swift.Result<[Sudo], Error>) -> Void) throws
 
     /// Redeem a token to be granted additional entitlements.
     ///
@@ -128,7 +81,7 @@ public protocol SudoProfilesClient: class {
     ///   - token: Token.
     ///   - type: Token type. Currently only valid value is "entitlements" but this maybe extended in future.
     ///   - completion: The completion handler to invoke to pass the resulting entitlements or error.
-    func redeem(token: String, type: String, completion: @escaping (RedeemResult) -> Void) throws
+    func redeem(token: String, type: String, completion: @escaping (Swift.Result<[Entitlement], Error>) -> Void) throws
 
     /// Returns the count of outstanding create or update requests.
     ///
@@ -155,12 +108,17 @@ public protocol SudoProfilesClient: class {
     /// - Parameter subscriber: Subscriber to notify.
     func subscribe(id: String, subscriber: SudoSubscriber) throws
 
-    /// Unsubscribes the specified subscriber so that it no longer receivies notifications about
+    /// Unsubscribes the specified subscriber so that it no longer receives notifications about
     ///  new, updated or deleted Sudos.
     ///
     /// - Parameter id: Unique ID associated with the subscriber to unsubscribe.
     /// - Parameter changeType: Change type to unsubscribe from.
     func unsubscribe(id: String, changeType: SudoChangeType)
+
+    /// Unsubscribes the specified subscriber so that it no longer receives change notifications.
+    ///
+    /// - Parameter id: Unique ID associated with the subscriber to unsubscribe.
+    func unsubscribe(id: String)
 
     /// Unsubscribe all subscribers from receiving notifications about new, updated or deleted Sudos.
     func unsubscribeAll()
@@ -171,6 +129,31 @@ public protocol SudoProfilesClient: class {
     ///   - sudo: Sudo to generate an ownership proof for.
     ///   - audience: Target audience for this proof.
     func getOwnershipProof(sudo: Sudo, audience: String, completion: @escaping (GetOwnershipProofResult) -> Void) throws
+
+    /// Generate an encryption key to use for encrypting Sudo claims. Any existing keys are not removed
+    /// to be able to decrypt existing claims but new claims will be encrypted using the newly generated
+    /// key.
+    ///
+    /// - Returns: Unique ID of the generated key.
+    func generateEncryptionKey() throws -> String
+
+    /// Get the current (most recently generated) symmetric key ID..
+    ///
+    /// - Returns: Symmetric Key ID.
+    func getSymmetricKeyId() throws -> String
+
+    /// Import encyrption keys to use for encrypting and decrypting Sudo claims. All existing keys will be removed
+    /// before the new keys are imported.
+    ///
+    /// - Parameters:
+    ///     - keys: Keys to import.
+    ///     - currentKeyId: ID of the key to use for encrypting new claims..
+    func importEncryptionKeys(keys: [EncryptionKey], currentKeyId: String) throws
+
+    /// Export encryption keys used for encrypting and decrypting Sudo claims.
+    ///
+    /// - Returns: Encryption keys.
+    func exportEncryptionKeys() throws -> [EncryptionKey]
 
 }
 
@@ -202,6 +185,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
     private struct Constants {
 
         static let s3ClientKey = "com.sudoplatform.s3"
+        static let defaultKeyNamespace = "ss"
 
     }
 
@@ -221,6 +205,9 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
 
     ///`SudoProfilesClient` instance required to issue authentication tokens and perform cryptographic operations.
     private let sudoUserClient: SudoUserClient
+
+    /// `CryptoProvider` instance used for cryptographic operations.
+    private var cryptoProvider: CryptoProvider
 
     /// GraphQL client for communicating with the Sudo  service.
     private let graphQLClient: AWSAppSyncClient
@@ -290,7 +277,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
     ///   - s3Client: Optional S3 client to use. Mainly use for unit testing.
     ///   - ownershipProofIssuer: Optional ownership proof issuer to use. Mainly use for testing of various service clients.
     /// - Throws: `SudoProfilesClientError`
-    public init(config: [String: Any], sudoUserClient: SudoUserClient, cacheType: CacheType = .disk, blobContainerURL: URL, maxSudos: Int = 10, logger: Logger? = nil, graphQLClient: AWSAppSyncClient? = nil, s3Client: S3Client? = nil, ownershipProofIssuer: OwnershipProofIssuer? = nil) throws {
+    public init(config: [String: Any], sudoUserClient: SudoUserClient, cacheType: CacheType = .disk, blobContainerURL: URL, maxSudos: Int = 10, logger: Logger? = nil, cryptoProvider: CryptoProvider? = nil, graphQLClient: AWSAppSyncClient? = nil, s3Client: S3Client? = nil, ownershipProofIssuer: OwnershipProofIssuer? = nil) throws {
 
         #if DEBUG
             AWSDDLog.sharedInstance.logLevel = .verbose
@@ -301,6 +288,9 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         self.logger = logger
         self.blobCache = try BlobCache(containerURL: blobContainerURL)
         self.sudoUserClient = sudoUserClient
+        self.cryptoProvider = cryptoProvider ?? DefaultCryptoProvider(keyNamespace: Constants.defaultKeyNamespace)
+        _ = try self.cryptoProvider.generateEncryptionKey()
+
         self.s3Client = s3Client ?? DefaultS3Client(s3ClientKey: Constants.s3ClientKey)
         self.defaultQuery = ListSudosQuery(limit: maxSudos, nextToken: nil)
 
@@ -342,7 +332,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         }
     }
 
-    public func createSudo(sudo: Sudo, completion: @escaping (CreateSudoResult) -> Void) throws {
+    public func createSudo(sudo: Sudo, completion: @escaping (Swift.Result<Sudo, Error>) -> Void) throws {
         self.logger.info("Creating a Sudo.")
 
         // Retrieve the federated identity's ID from the identity client. This ID is required
@@ -354,11 +344,11 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
 
         // First create the Sudo without any claims since we need the Sudo ID to create
         // the blob claims in S3.
-        let createSudoOp = CreateSudo(sudoUserClient: self.sudoUserClient, graphQLClient: self.graphQLClient, region: self.region, bucket: self.s3Bucket, identityId: identityId, sudo: Sudo())
+        let createSudoOp = CreateSudo(cryptoProvider: self.cryptoProvider, graphQLClient: self.graphQLClient, region: self.region, bucket: self.s3Bucket, identityId: identityId, sudo: Sudo())
         createSudoOp.completionBlock = {
             if let error = createSudoOp.error {
                 self.logger.error("Failed create Sudo: \(error)")
-                completion(CreateSudoResult.failure(cause: error))
+                completion(.failure(error))
             } else {
                 do {
                     // Update the newly created Sudo to add the claims.
@@ -367,13 +357,13 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
                         switch result {
                         case let .success(sudo):
                             self.logger.info("Sudo created successfully.")
-                            completion(CreateSudoResult.success(sudo: sudo))
+                            completion(.success(sudo))
                         case let .failure(cause):
-                            completion(CreateSudoResult.failure(cause: cause))
+                            completion(.failure(cause))
                         }
                     }
                 } catch {
-                    completion(CreateSudoResult.failure(cause: error))
+                    completion(.failure(error))
                 }
             }
         }
@@ -381,7 +371,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         self.sudoOperationQueue.addOperation(createSudoOp)
     }
 
-    public func updateSudo(sudo: Sudo, completion: @escaping (UpdateSudoResult) -> Void) throws {
+    public func updateSudo(sudo: Sudo, completion: @escaping (Swift.Result<Sudo, Error>) -> Void) throws {
         self.logger.info("Updating a Sudo.")
 
         guard let sudoId = sudo.id else {
@@ -411,7 +401,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
                     sudo.updateClaim(claim: claim)
                     operations.append(
                         UploadSecureS3Object(
-                            sudoUserClient: self.sudoUserClient,
+                            cryptoProvider: self.cryptoProvider,
                             s3Client: self.s3Client,
                             blobCache: self.blobCache,
                             region: self.region,
@@ -422,29 +412,29 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
                     )
                 } catch {
                     self.logger.error("Failed to create blob upload operation: \(error)")
-                    return completion(UpdateSudoResult.failure(cause: error))
+                    return completion(.failure(error))
                 }
             default:
                 break
             }
         }
 
-        let updateSudoOp = UpdateSudo(sudoUserClient: self.sudoUserClient, graphQLClient: self.graphQLClient, region: self.region, bucket: self.s3Bucket, identityId: identityId, sudo: sudo)
+        let updateSudoOp = UpdateSudo(cryptoProvider: self.cryptoProvider, graphQLClient: self.graphQLClient, region: self.region, bucket: self.s3Bucket, identityId: identityId, sudo: sudo)
         updateSudoOp.completionBlock = {
             let errors = operations.compactMap { $0.error }
             if let error = errors.first {
                 self.logger.error("Failed update Sudo: \(error)")
-                completion(UpdateSudoResult.failure(cause: error))
+                completion(.failure(error))
             } else {
                 self.logger.info("Sudo updated successfully.")
-                completion(UpdateSudoResult.success(sudo: updateSudoOp.sudo))
+                completion(.success(updateSudoOp.sudo))
             }
         }
         operations.append(updateSudoOp)
         self.sudoOperationQueue.addOperations(operations, waitUntilFinished: false)
     }
 
-    public func deleteSudo(sudo: Sudo, completion: @escaping (ApiResult) -> Void) throws {
+    public func deleteSudo(sudo: Sudo, completion: @escaping (Swift.Result<Void, Error>) -> Void) throws {
         self.logger.info("Deleting a Sudo.")
 
         // Retrieve the federated identity's ID from the identity client. This ID is required
@@ -482,10 +472,10 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
             let errors = operations.compactMap { $0.error }
             if let error = errors.first {
                 self.logger.error("Failed delete Sudo: \(error)")
-                completion(ApiResult.failure(cause: error))
+                completion(.failure(error))
             } else {
                 self.logger.info("Sudo deleted succcessfully.")
-                completion(ApiResult.success)
+                completion(.success(()))
             }
         }
         operations.append(deleteSudoOp)
@@ -493,7 +483,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         self.sudoOperationQueue.addOperations(operations, waitUntilFinished: false)
     }
 
-    public func listSudos(option: ListOption, completion: @escaping (ListSudosResult) -> Void) throws {
+    public func listSudos(option: ListOption, completion: @escaping (Swift.Result<[Sudo], Error>) -> Void) throws {
         self.logger.info("Listing Sudos.")
 
         let cachePolicy: CachePolicy
@@ -502,25 +492,27 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
             cachePolicy = .returnCacheDataDontFetch
         case .remoteOnly:
             cachePolicy = .fetchIgnoringCacheData
+        case .returnCachedElseFetch:
+            cachePolicy = .returnCacheDataElseFetch
         }
 
         self.graphQLClient.fetch(query: self.defaultQuery, cachePolicy: cachePolicy) { (result, error) in
             if let error = error {
-                return completion(ListSudosResult.failure(cause: error))
+                return completion(.failure(error))
             }
 
             guard let result = result else {
-                return completion(ListSudosResult.success(sudos: []))
+                return completion(.success([]))
             }
 
             if let errors = result.errors {
                 let message = "listSudos query failed with errors: \(errors)"
                 self.logger.error(message)
-                return completion(ListSudosResult.failure(cause: SudoProfilesClientError.graphQLError(description: message)))
+                return completion(.failure(SudoProfilesClientError.graphQLError(description: message)))
             }
 
             guard let items = result.data?.listSudos?.items else {
-                return completion(ListSudosResult.failure(cause: SudoProfilesClientError.fatalError(description: "Query result contained no list data.")))
+                return completion(.failure(SudoProfilesClientError.fatalError(description: "Query result contained no list data.")))
             }
 
             self.logger.info("Sudos fetched successfully. Processing the result....")
@@ -529,17 +521,17 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         }
     }
 
-    public func redeem(token: String, type: String, completion: @escaping (RedeemResult) -> Void) throws {
+    public func redeem(token: String, type: String, completion: @escaping (Swift.Result<[Entitlement], Error>) -> Void) throws {
         self.logger.info("Redeeming a token for entitlements.")
 
         let redeemOp = RedeemToken(graphQLClient: self.graphQLClient, token: token, type: type)
         redeemOp.completionBlock = {
            if let error = redeemOp.error {
                 self.logger.error("Failed redeem a token for entitlements: \(error)")
-                completion(RedeemResult.failure(cause: error))
+            completion(.failure(error))
             } else {
                 self.logger.info("Token redeemed succcessfully.")
-                completion(RedeemResult.success(entitlements: redeemOp.entitlements))
+                completion(.success(redeemOp.entitlements))
             }
         }
         self.sudoOperationQueue.addOperations([redeemOp], waitUntilFinished: false)
@@ -554,6 +546,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
 
         try self.graphQLClient.clearCaches(options: .init(clearQueries: true, clearMutations: true, clearSubscriptions: true))
         try self.blobCache.reset()
+        try self.cryptoProvider.reset()
         self.unsubscribeAll()
     }
 
@@ -868,6 +861,13 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         }
     }
 
+    public func unsubscribe(id: String) {
+        self.logger.info("Unsubscribing from all Sudo change notification.")
+        self.unsubscribe(id: id, changeType: .create)
+        self.unsubscribe(id: id, changeType: .update)
+        self.unsubscribe(id: id, changeType: .delete)
+    }
+
     public func unsubscribeAll() {
         self.logger.info("Unsubscribing all subscribers from Sudo change notification.")
 
@@ -890,6 +890,22 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         try self.ownershipProofIssuer.getOwnershipProof(ownerId: sudoId, subject: subject, audience: audience, completion: completion)
     }
 
+    public func generateEncryptionKey() throws -> String {
+        return try self.cryptoProvider.generateEncryptionKey()
+    }
+
+    public func getSymmetricKeyId() throws -> String {
+        return try self.cryptoProvider.getSymmetricKeyId()
+    }
+
+    public func importEncryptionKeys(keys: [EncryptionKey], currentKeyId: String) throws {
+        try self.cryptoProvider.importEncryptionKeys(keys: keys, currentKeyId: currentKeyId)
+    }
+
+    public func exportEncryptionKeys() throws -> [EncryptionKey] {
+        return try self.cryptoProvider.exportEncryptionKeys()
+    }
+
     private func processSecureClaim(secureClaim: ListSudosQuery.Data.ListSudo.Item.Claim) throws -> Claim {
         guard let algorithm = SymmetricKeyEncryptionAlgorithm(rawValue: secureClaim.algorithm) else {
             self.logger.error("Secure claim encryption algorithm is invalid.")
@@ -901,7 +917,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
             throw SudoProfilesClientError.badData
         }
 
-        let decryptedData = try self.sudoUserClient.decrypt(keyId: secureClaim.keyId, algorithm: algorithm, data: encryptedData)
+        let decryptedData = try self.cryptoProvider.decrypt(keyId: secureClaim.keyId, algorithm: algorithm, data: encryptedData)
 
         guard let value = String(data: decryptedData, encoding: .utf8) else {
             self.logger.error("Secure claim value cannot be encoded to String.")
@@ -916,7 +932,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         return components.last
     }
 
-    private func processListSudosResult(items: [ListSudosQuery.Data.ListSudo.Item], option: ListOption, processS3Objects: Bool, completion: @escaping (ListSudosResult) -> Void) {
+    private func processListSudosResult(items: [ListSudosQuery.Data.ListSudo.Item], option: ListOption, processS3Objects: Bool, completion: @escaping (Swift.Result<[Sudo], Error>) -> Void) {
         var sudos: [Sudo] = []
         var downloadOps: [DownloadSecureS3Object] = []
         for item in items {
@@ -941,7 +957,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
                     // using the specified key.
                     for secureS3Object in item.objects {
                         guard let objectId = self.getS3ObjectIdFromKey(key: secureS3Object.key) else {
-                            return completion(ListSudosResult.failure(cause: SudoProfilesClientError.fatalError(description: "Invalid key in SecureS3Object.")))
+                            return completion(.failure(SudoProfilesClientError.fatalError(description: "Invalid key in SecureS3Object.")))
                         }
 
                         // Check if we already have the S3 object in the cache. Return the cache entry
@@ -953,7 +969,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
                             sudo.updateClaim(claim: Claim(name: secureS3Object.name, visibility: .private, value: .blob(self.blobCache.cacheUrlFromId(id: objectId))))
                             downloadOps.append(
                                 DownloadSecureS3Object(
-                                    sudoUserClient: self.sudoUserClient,
+                                    cryptoProvider: self.cryptoProvider,
                                     s3Client: self.s3Client,
                                     blobCache: self.blobCache,
                                     bucket: secureS3Object.bucket,
@@ -970,22 +986,22 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
                 sudos.append(sudo)
             } catch {
                 self.logger.error("Failed to process secure claims: \(error)")
-                return completion(ListSudosResult.failure(cause: error))
+                return completion(.failure(error))
             }
         }
 
         if downloadOps.isEmpty {
             self.logger.info("ListSudos result processed successfully.")
-            completion(ListSudosResult.success(sudos: sudos))
+            completion(.success(sudos))
         } else {
             downloadOps.last?.completionBlock = {
                 let errors = downloadOps.compactMap { $0.error }
                 if let error = errors.first {
                     self.logger.error("Failed to process ListSudos result: \(error)")
-                    completion(ListSudosResult.failure(cause: error))
+                    completion(.failure(error))
                 } else {
                     self.logger.info("ListSudos result processed successfully.")
-                    completion(ListSudosResult.success(sudos: sudos))
+                    completion(.success(sudos))
                 }
             }
 
