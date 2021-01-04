@@ -140,7 +140,7 @@ public protocol SudoProfilesClient: class {
     /// Get the current (most recently generated) symmetric key ID..
     ///
     /// - Returns: Symmetric Key ID.
-    func getSymmetricKeyId() throws -> String
+    func getSymmetricKeyId() throws -> String?
 
     /// Import encyrption keys to use for encrypting and decrypting Sudo claims. All existing keys will be removed
     /// before the new keys are imported.
@@ -289,7 +289,10 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         self.blobCache = try BlobCache(containerURL: blobContainerURL)
         self.sudoUserClient = sudoUserClient
         self.cryptoProvider = cryptoProvider ?? DefaultCryptoProvider(keyNamespace: Constants.defaultKeyNamespace)
-        _ = try self.cryptoProvider.generateEncryptionKey()
+
+        if (try self.cryptoProvider.getSymmetricKeyId()) == nil {
+            _ = try self.cryptoProvider.generateEncryptionKey()
+        }
 
         self.s3Client = s3Client ?? DefaultS3Client(s3ClientKey: Constants.s3ClientKey)
         self.defaultQuery = ListSudosQuery(limit: maxSudos, nextToken: nil)
@@ -894,7 +897,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         return try self.cryptoProvider.generateEncryptionKey()
     }
 
-    public func getSymmetricKeyId() throws -> String {
+    public func getSymmetricKeyId() throws -> String? {
         return try self.cryptoProvider.getSymmetricKeyId()
     }
 

@@ -126,7 +126,9 @@ class CreateSudo: SudoOperation {
     ///   - value: String value of the claim.
     /// - Returns: Secure claim.
     private func createSecureClaim(name: String, value: String) throws -> SecureClaimInput {
-        let keyId = try self.cryptoProvider.getSymmetricKeyId()
+        guard let keyId = try self.cryptoProvider.getSymmetricKeyId() else {
+            throw SudoProfilesClientError.fatalError(description: "Symmetric key missing.")
+        }
         let encrypted = try self.cryptoProvider.encrypt(keyId: keyId, algorithm: SymmetricKeyEncryptionAlgorithm.aesCBCPKCS7Padding, data: value.data(using: .utf8)!)
         return SecureClaimInput(name: name,
                                 version: 1,
@@ -142,7 +144,9 @@ class CreateSudo: SudoOperation {
     ///   - key: Object key.
     /// - Returns: Secure S3 object.
     private func createSecureS3Object(name: String, key: String) throws -> SecureS3ObjectInput {
-        let keyId = try self.cryptoProvider.getSymmetricKeyId()
+        guard let keyId = try self.cryptoProvider.getSymmetricKeyId() else {
+            throw SudoProfilesClientError.fatalError(description: "Symmetric key missing.")
+        }
         return SecureS3ObjectInput(name: name,
                                    version: 1,
                                    algorithm: SymmetricKeyEncryptionAlgorithm.aesCBCPKCS7Padding.rawValue,

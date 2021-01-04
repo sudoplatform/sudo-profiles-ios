@@ -73,7 +73,7 @@ public protocol CryptoProvider: class {
     /// Get the current (most recently generated) symmetric key ID.
     ///
     /// - Returns: Symmetric Key ID.
-    func getSymmetricKeyId() throws -> String
+    func getSymmetricKeyId() throws -> String?
 
     /// Import encyrption keys to use for encrypting and decrypting Sudo claims.
     ///
@@ -122,9 +122,9 @@ public class DefaultCryptoProvider: CryptoProvider {
                                              namespace: keyNamespace)
     }
 
-    public func getSymmetricKeyId() throws -> String {
+    public func getSymmetricKeyId() throws -> String? {
         guard let symmKeyIdData = try self.keyManager.getPassword(Constants.KeyName.symmetricKeyId), let symmetricKeyId = String(data: symmKeyIdData, encoding: .utf8) else {
-            throw SudoProfilesClientError.fatalError(description: "Symmetric key missing.")
+            return nil
         }
 
         return symmetricKeyId

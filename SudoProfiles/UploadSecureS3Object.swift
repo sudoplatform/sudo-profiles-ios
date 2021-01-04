@@ -55,16 +55,6 @@ class UploadSecureS3Object: SudoOperation {
     }
 
     override func execute() {
-        // Retrieve the symmetric key ID required for encryption.
-        let keyId: String
-        do {
-            keyId = try self.cryptoProvider.getSymmetricKeyId()
-        } catch {
-            self.logger.error("Failed to retrieve symmetric key: \(error)")
-            self.error = SudoOperationError.preconditionFailure
-            return self.done()
-        }
-
         // Check that the S3 object to upload has been saved to the cache.
         guard let cacheEntry = self.blobCache.get(id: objectId) else {
             self.logger.error("Cannot find the S3 object to upload in the cache.")
@@ -74,6 +64,11 @@ class UploadSecureS3Object: SudoOperation {
 
         let encryptedS3Data: Data
         do {
+            // Retrieve the symmetric key ID required for encryption.
+            guard let keyId = try self.cryptoProvider.getSymmetricKeyId() else {
+                throw SudoProfilesClientError.fatalError(description: "Symmetric key missing.")
+            }
+
             // Load the data from the cache and encrypt it.
             let data = try cacheEntry.load()
             encryptedS3Data = try self.cryptoProvider.encrypt(keyId: keyId, algorithm: .aesCBCPKCS7Padding, data: data)
