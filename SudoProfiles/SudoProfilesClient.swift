@@ -3,6 +3,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 //
+// swiftlint:disable cyclomatic_complexity
 
 import Foundation
 import SudoLogging
@@ -203,7 +204,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
     /// S3 bucket used by Sudo service for storing large objects.
     private let s3Bucket: String
 
-    ///`SudoProfilesClient` instance required to issue authentication tokens and perform cryptographic operations.
+    /// `SudoProfilesClient` instance required to issue authentication tokens and perform cryptographic operations.
     private let sudoUserClient: SudoUserClient
 
     /// `CryptoProvider` instance used for cryptographic operations.

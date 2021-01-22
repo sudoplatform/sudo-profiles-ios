@@ -178,9 +178,9 @@ public class DefaultCryptoProvider: CryptoProvider {
                 KeyAttributeName.version: $0.version,
                 KeyAttributeName.data: $0.key,
                 KeyAttributeName.synchronizable: false,
-                KeyAttributeName.type: KeyType.symmetricKey.rawValue,
+                KeyAttributeName.type: KeyType.symmetricKey.rawValue
             ]
-        } as [[KeyAttributeName : AnyObject]])
+        } as [[KeyAttributeName: AnyObject]])
 
         try self.keyManager.deletePassword(Constants.KeyName.symmetricKeyId)
         try self.keyManager.addPassword(symmetricKeyIdData, name: Constants.KeyName.symmetricKeyId)

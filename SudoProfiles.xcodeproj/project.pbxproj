@@ -972,7 +972,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AD31BCD597CF9DBA3310C735 /* Pods-SudoProfilesTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UU2W43R8JA;
 				INFOPLIST_FILE = SudoProfilesTests/Info.plist;
@@ -992,7 +991,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 73E2136B436B41959CCED2CE /* Pods-SudoProfilesTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UU2W43R8JA;
 				INFOPLIST_FILE = SudoProfilesTests/Info.plist;
