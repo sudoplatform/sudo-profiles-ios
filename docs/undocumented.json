@@ -352,14 +352,14 @@
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 164,
+      "line": 165,
       "symbol": "DefaultSudoProfilesClient.CacheType",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 169,
+      "line": 170,
       "symbol": "DefaultSudoProfilesClient.Config",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"

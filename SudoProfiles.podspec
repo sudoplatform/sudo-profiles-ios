@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                  = 'SudoProfiles'
-  spec.version               = '8.0.0'
+  spec.version               = '9.0.0'
   spec.author                = { 'Sudo Platform Engineering' => 'sudoplatform-engineering@anonyome.com' }
   spec.homepage              = 'https://sudoplatform.com'
   spec.summary               = 'Profiles SDK for the Sudo Platform by Anonyome Labs.'
@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
   spec.swift_version         = '5.0'
 
   spec.dependency 'SudoConfigManager', '~> 1.3'
-  spec.dependency 'SudoUser', '~> 9.0'
-  spec.dependency 'SudoApiClient', '~> 2.0'
+  spec.dependency 'SudoUser', '~> 10.0'
+  spec.dependency 'SudoApiClient', '~> 3.0'
   spec.dependency 'SudoLogging', '~> 0.3'
 end

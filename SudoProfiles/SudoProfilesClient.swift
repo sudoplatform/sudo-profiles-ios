@@ -136,6 +136,7 @@ public protocol SudoProfilesClient: class {
     /// key.
     ///
     /// - Returns: Unique ID of the generated key.
+    @discardableResult
     func generateEncryptionKey() throws -> String
 
     /// Get the current (most recently generated) symmetric key ID..
