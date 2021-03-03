@@ -16,6 +16,9 @@ import SudoApiClient
 /// List of possible errors thrown by `SudoProfilesClient` implementation.
 ///
 /// - invalidConfig: Indicates that the configuration dictionary passed to initialize the client was not valid.
+/// - sudoServiceConfigNotFound: Indicates the configuration related to Sudo Service is not found.
+///     This may indicate that Sudo Service is not deployed into your runtime instance or the config
+///     file that you are using is invalid..
 /// - invalidInput: Indicates that the input to the API was invalid.
 /// - notSignedIn: Indicates the API being called requires the client to sign in.
 /// - badData: Indicates the bad data was found in cache or in backend response.
@@ -24,6 +27,7 @@ import SudoApiClient
 ///     condition or other conditions that is beyond control of `SudoProfilesClient` implementation.
 public enum SudoProfilesClientError: Error {
     case invalidConfig
+    case sudoServiceConfigNotFound
     case invalidInput
     case notSignedIn
     case badData
@@ -251,10 +255,14 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
     ///   - logger: A logger to use for logging messages. If none provided then a default internal logger will be used.
     /// - Throws: `SudoProfilesClientError`
     convenience public init(sudoUserClient: SudoUserClient, blobContainerURL: URL, maxSudos: Int = 10) throws {
-        guard let configManager = DefaultSudoConfigManager(),
+        guard let configManager = SudoConfigManagerFactory.instance.getConfigManager(name: SudoConfigManagerFactory.Constants.defaultConfigManagerName),
             let identityServiceConfig = configManager.getConfigSet(namespace: Config.Namespace.identityService),
             let apiServiceConfig = configManager.getConfigSet(namespace: Config.Namespace.apiService) else {
             throw SudoProfilesClientError.invalidConfig
+        }
+
+        guard let sudoServiceConfig = configManager.getConfigSet(namespace: Config.Namespace.sudoService) else {
+            throw SudoProfilesClientError.sudoServiceConfigNotFound
         }
 
         // Use the singleton AppSync client instance if we are using the config file.
@@ -262,7 +270,9 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
             throw SudoProfilesClientError.invalidConfig
         }
 
-        try self.init(config: [Config.Namespace.identityService: identityServiceConfig, Config.Namespace.apiService: apiServiceConfig],
+        try self.init(config: [Config.Namespace.identityService: identityServiceConfig,
+                               Config.Namespace.apiService: apiServiceConfig,
+                               Config.Namespace.sudoService: sudoServiceConfig],
                       sudoUserClient: sudoUserClient, blobContainerURL: blobContainerURL, maxSudos: maxSudos, graphQLClient: graphQLClient)
     }
 
@@ -298,6 +308,12 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
 
         self.s3Client = s3Client ?? DefaultS3Client(s3ClientKey: Constants.s3ClientKey)
         self.defaultQuery = ListSudosQuery(limit: maxSudos, nextToken: nil)
+
+        // Currently there isn't Sudo Service specific config but we are just checking the existent
+        // of it as an indication on whether or not Sudo Service is deployed.
+        guard (config[Config.Namespace.sudoService] as? [String: Any]) != nil else {
+            throw SudoProfilesClientError.sudoServiceConfigNotFound
+        }
 
         guard let sudoServiceConfig = config[Config.Namespace.apiService] as? [String: Any] ?? config[Config.Namespace.sudoService] as? [String: Any],
             let identityServiceConfig = config[Config.Namespace.identityService] as? [String: Any],
