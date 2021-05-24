@@ -315,42 +315,22 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
             throw SudoProfilesClientError.sudoServiceConfigNotFound
         }
 
-        guard let sudoServiceConfig = config[Config.Namespace.apiService] as? [String: Any] ?? config[Config.Namespace.sudoService] as? [String: Any],
+        guard let sudoServiceConfig = config[Config.Namespace.sudoService] as? [String: Any],
             let identityServiceConfig = config[Config.Namespace.identityService] as? [String: Any],
-            let configProvider = SudoProfilesClientConfigProvider(config: sudoServiceConfig),
             let region = sudoServiceConfig[Config.SudoService.region] as? String,
-            let bucket = identityServiceConfig[Config.SudoService.bucket] as? String else {
+            let bucket = sudoServiceConfig[Config.SudoService.bucket] as? String ?? identityServiceConfig[Config.SudoService.bucket] as? String else {
             throw SudoProfilesClientError.invalidConfig
         }
 
         self.region = region
         self.s3Bucket = bucket
 
-        if let graphQLClient = graphQLClient {
-            self.graphQLClient = graphQLClient
-            try self.ownershipProofIssuer = ownershipProofIssuer ?? DefaultOwnershipProofIssuer(graphQLClient: graphQLClient)
-        } else {
-            let cacheConfiguration: AWSAppSyncCacheConfiguration
-            switch cacheType {
-            case .memory:
-                cacheConfiguration = AWSAppSyncCacheConfiguration.inMemory
-            case .disk:
-                cacheConfiguration = try AWSAppSyncCacheConfiguration()
-            }
-
-            let appSyncConfig = try AWSAppSyncClientConfiguration(appSyncServiceConfig: configProvider,
-                                                                  userPoolsAuthProvider: GraphQLAuthProvider(client: self.sudoUserClient),
-                                                                  urlSessionConfiguration: URLSessionConfiguration.default,
-                                                                  cacheConfiguration: cacheConfiguration,
-                                                                  connectionStateChangeHandler: nil,
-                                                                  s3ObjectManager: nil,
-                                                                  presignedURLClient: nil,
-                                                                  retryStrategy: .exponential)
-            let graphQLClient = try AWSAppSyncClient(appSyncConfig: appSyncConfig)
-            graphQLClient.apolloClient?.cacheKeyForObject = { $0["id"] }
-            self.graphQLClient = graphQLClient
-            try self.ownershipProofIssuer = ownershipProofIssuer ?? DefaultOwnershipProofIssuer(graphQLClient: graphQLClient)
+        guard let graphQLClient = graphQLClient else {
+            throw SudoProfilesClientError.invalidConfig
         }
+
+        self.graphQLClient = graphQLClient
+        try self.ownershipProofIssuer = ownershipProofIssuer ?? DefaultOwnershipProofIssuer(graphQLClient: graphQLClient)
     }
 
     public func createSudo(sudo: Sudo, completion: @escaping (Swift.Result<Sudo, Error>) -> Void) throws {
