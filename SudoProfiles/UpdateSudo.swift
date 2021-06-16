@@ -121,6 +121,8 @@ class UpdateSudo: SudoOperation {
                         self.error = UpdateSudoError.sudoNotFound
                     case Constants.conditionalCheckFailedException:
                         self.error = UpdateSudoError.versionMismatch
+                    case SudoOperation.SudoServiceError.insufficientEntitlementsError:
+                        self.error = SudoOperationError.insufficientEntitlementsError
                     case SudoOperation.SudoServiceError.serviceError:
                         self.error = SudoOperationError.serviceError
                     default:

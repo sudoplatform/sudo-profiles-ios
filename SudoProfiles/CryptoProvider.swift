@@ -41,7 +41,7 @@ public enum SymmetricKeyEncryptionAlgorithm: String {
 }
 
 /// Provides utility functions for cryptographic operations.
-public protocol CryptoProvider: class {
+public protocol CryptoProvider: AnyObject {
 
     /// Encrypts the given data using the specified key and encryption algorithm.
     ///

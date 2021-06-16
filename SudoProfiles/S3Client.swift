@@ -45,7 +45,7 @@ public enum S3ApiResult {
 
 /// S3 client wrapper protocol mainly used for providing an abstraction layer on top of
 /// AWS S3 SDK.
-public protocol S3Client: class {
+public protocol S3Client: AnyObject {
 
     /// Uploads a blob to AWS S3.
     ///

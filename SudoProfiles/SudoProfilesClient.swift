@@ -47,7 +47,7 @@ public enum ListOption {
 }
 
 /// Protocol encapsulating a library functions for managing Sudos in the Sudo service.
-public protocol SudoProfilesClient: class {
+public protocol SudoProfilesClient: AnyObject {
 
     /// Creates a new Sudo.
     ///

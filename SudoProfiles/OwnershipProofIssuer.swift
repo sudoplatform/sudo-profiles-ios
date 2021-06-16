@@ -15,6 +15,8 @@ import SudoLogging
 /// - invalidConfig: Indicates the input to initializing or configuring the issuer was invalid.
 /// - sudoNotFound: Indicates the specified Sudo does not exists.
 /// - graphQLError: Sudo service's GraphQL endpoint returned an error.
+/// - insufficientEntitlementsError: Indicates that the user is over-entitled  and cannot be issued an ownership proof
+///         until the user purchases additional entitlements or delete existing Sudos.
 /// - serviceError: Indicates that an internal server error caused the operation to fail. The error is
 ///     possibly transient and retrying at a later time may cause the operation to complete
 ///     successfully
@@ -22,6 +24,7 @@ public enum OwnershipProofIssuerError: Error {
     case invalidConfig
     case serviceError
     case sudoNotFound
+    case insufficientEntitlementsError
     case graphQLError(description: String)
 }
 
@@ -39,7 +42,7 @@ public enum GetOwnershipProofResult {
 // These APIs are used by other Sudo platform clients and any
 // app developed using this SDK is not expected to use these
 // APIs directly.
-public protocol OwnershipProofIssuer: class {
+public protocol OwnershipProofIssuer: AnyObject {
 
     /// Retrieves a signed owernship proof for the specified owner. The owership
     /// proof JWT has the follow payload.
@@ -75,6 +78,7 @@ class DefaultOwnershipProofIssuer: OwnershipProofIssuer {
     private struct Constants {
         static let sudoNotFoundError = "sudoplatform.sudo.SudoNotFound"
         static let serviceError = "sudoplatform.ServiceError"
+        static let insufficientEntitlementsError = "sudoplatform.InsufficientEntitlementsError"
     }
 
     private let graphQLClient: AWSAppSyncClient
@@ -115,6 +119,8 @@ class DefaultOwnershipProofIssuer: OwnershipProofIssuer {
                         result = .failure(cause: OwnershipProofIssuerError.sudoNotFound)
                     case Constants.serviceError:
                         result = .failure(cause: OwnershipProofIssuerError.serviceError)
+                    case Constants.insufficientEntitlementsError:
+                        result = .failure(cause: OwnershipProofIssuerError.insufficientEntitlementsError)
                     default:
                         result = .failure(cause: OwnershipProofIssuerError.graphQLError(description: message))
                     }

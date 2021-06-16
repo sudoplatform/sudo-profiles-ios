@@ -30,49 +30,56 @@
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 22,
+      "line": 24,
       "symbol": "OwnershipProofIssuerError.invalidConfig",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 23,
+      "line": 25,
       "symbol": "OwnershipProofIssuerError.serviceError",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 24,
+      "line": 26,
       "symbol": "OwnershipProofIssuerError.sudoNotFound",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 25,
+      "line": 27,
+      "symbol": "OwnershipProofIssuerError.insufficientEntitlementsError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
+      "line": 28,
       "symbol": "OwnershipProofIssuerError.graphQLError(description:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 34,
+      "line": 37,
       "symbol": "GetOwnershipProofResult.success(jwt:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 35,
+      "line": 38,
       "symbol": "GetOwnershipProofResult.failure(cause:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 42,
+      "line": 45,
       "symbol": "OwnershipProofIssuer",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
