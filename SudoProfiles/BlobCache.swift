@@ -101,7 +101,7 @@ class BlobCache {
     ///
     /// - Parameter url: Cache entry URL.
     func remove(url: URL) throws {
-        guard self.containerURL.standardizedFileURL == url.deletingLastPathComponent().standardizedFileURL else {
+        guard url.standardizedFileURL.path.starts(with: self.containerURL.standardizedFileURL.path) else {
             return
         }
 
@@ -130,7 +130,9 @@ class BlobCache {
     /// - Parameter url: Cache entry URL.
     /// - Returns: Cache entry.
     func get(url: URL) -> Entry? {
-        guard self.containerURL.standardizedFileURL == url.deletingLastPathComponent().standardizedFileURL else {
+        let path = url.standardizedFileURL.path
+        let containerPath = self.containerURL.standardizedFileURL.path
+        guard path.starts(with: containerPath) else {
             return nil
         }
 
@@ -138,7 +140,7 @@ class BlobCache {
             return nil
         }
 
-        return Entry(containerURL: self.containerURL, id: url.lastPathComponent)
+        return Entry(containerURL: self.containerURL, id: String(path.dropFirst(containerPath.count + 1)))
     }
 
     /// Generates a cache URL from an ID.
@@ -153,8 +155,18 @@ class BlobCache {
     ///
     /// - Returns: Number of entries in the cache.
     func count() throws -> Int {
-        let dirContents = try FileManager.default.contentsOfDirectory(atPath: self.containerURL.path)
-        return dirContents.count
+        var count = 0
+
+        if let enumerator = FileManager.default.enumerator(at: self.containerURL, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+            for case let url as URL in enumerator {
+                let fileAttributes = try url.resourceValues(forKeys: [.isRegularFileKey])
+                if let status = fileAttributes.isRegularFile, status {
+                    count += 1
+                }
+            }
+        }
+
+        return count
     }
 
     /// Removes all entries from the cache.
