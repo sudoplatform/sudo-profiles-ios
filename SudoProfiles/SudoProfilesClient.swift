@@ -438,10 +438,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
     public func deleteSudo(sudo: Sudo, completion: @escaping (Swift.Result<Void, Error>) -> Void) throws {
         self.logger.info("Deleting a Sudo.")
 
-        // Retrieve the federated identity's ID from the identity client. This ID is required
-        // to authorize the access to S3 bucket and required to be a part of the S3 key.
-        guard let identityId = self.sudoUserClient.getIdentityId() else {
-            self.logger.error("Identity ID is missing. The client may not be signed in yet.")
+        guard try self.sudoUserClient.isSignedIn() else {
             throw SudoProfilesClientError.notSignedIn
         }
 
@@ -454,11 +451,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
                 if let cacheEntry = self.blobCache.get(url: value) {
                     operations.append(
                         DeleteS3Object(
-                            s3Client: self.s3Client,
                             blobCache: self.blobCache,
-                            region: self.region,
-                            bucket: self.s3Bucket,
-                            identityId: identityId,
                             objectId: cacheEntry.id
                         )
                     )
