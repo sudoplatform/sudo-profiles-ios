@@ -9,24 +9,7 @@ import SudoKeyManager
 import SudoUser
 import AWSAppSync
 import SudoLogging
-
-/// List of possible errors thrown by `OwnershipProofIssuer` implementation.
-///
-/// - invalidConfig: Indicates the input to initializing or configuring the issuer was invalid.
-/// - sudoNotFound: Indicates the specified Sudo does not exists.
-/// - graphQLError: Sudo service's GraphQL endpoint returned an error.
-/// - insufficientEntitlementsError: Indicates that the user is over-entitled  and cannot be issued an ownership proof
-///         until the user purchases additional entitlements or delete existing Sudos.
-/// - serviceError: Indicates that an internal server error caused the operation to fail. The error is
-///     possibly transient and retrying at a later time may cause the operation to complete
-///     successfully
-public enum OwnershipProofIssuerError: Error {
-    case invalidConfig
-    case serviceError
-    case sudoNotFound
-    case insufficientEntitlementsError
-    case graphQLError(description: String)
-}
+import SudoApiClient
 
 /// Result returned by APIs for retrieve Sudo owernship proof. The API can fail
 /// with an error or return a signed proof in form of JWT.
@@ -81,7 +64,7 @@ class DefaultOwnershipProofIssuer: OwnershipProofIssuer {
         static let insufficientEntitlementsError = "sudoplatform.InsufficientEntitlementsError"
     }
 
-    private let graphQLClient: AWSAppSyncClient
+    private let graphQLClient: SudoApiClient
 
     private let logger: Logger
 
@@ -92,50 +75,39 @@ class DefaultOwnershipProofIssuer: OwnershipProofIssuer {
     /// - Parameters:
     ///   - graphQLClient: GraphQL client to use to contact Sudo service.
     ///   - logger: Logger to use for logging.
-    init(graphQLClient: AWSAppSyncClient, logger: Logger = Logger.sudoProfilesClientLogger) throws {
+    init(graphQLClient: SudoApiClient, logger: Logger = Logger.sudoProfilesClientLogger) throws {
         self.graphQLClient = graphQLClient
         self.logger = logger
     }
 
     func getOwnershipProof(ownerId: String, subject: String, audience: String, completion: @escaping (GetOwnershipProofResult) -> Void) throws {
-        self.graphQLClient.perform(mutation: GetOwnershipProofMutation(input: GetOwnershipProofInput(sudoId: ownerId, audience: audience)), queue: self.queue) { (result, error) in
-            if let error = error {
-                self.logger.error("Failed to retrieve ownership proof: \(error)")
-                return completion(.failure(cause: error))
-            }
-
-            guard let result = result else {
-                return completion(.failure(cause: SudoOperationError.fatalError(description: "Mutation completed successfully but result is missing.")))
-            }
-
-            if let error = result.errors?.first {
-                let message = "Failed to retrieve ownership proof: \(error)"
-                self.logger.error(message)
-
-                let result: GetOwnershipProofResult
-                if let errorType = error[SudoOperation.SudoServiceError.type] as? String {
-                    switch errorType {
-                    case Constants.sudoNotFoundError:
-                        result = .failure(cause: OwnershipProofIssuerError.sudoNotFound)
-                    case Constants.serviceError:
-                        result = .failure(cause: OwnershipProofIssuerError.serviceError)
-                    case Constants.insufficientEntitlementsError:
-                        result = .failure(cause: OwnershipProofIssuerError.insufficientEntitlementsError)
-                    default:
-                        result = .failure(cause: OwnershipProofIssuerError.graphQLError(description: message))
+        do {
+            try self.graphQLClient.perform(
+                mutation: GetOwnershipProofMutation(input: GetOwnershipProofInput(sudoId: ownerId, audience: audience)),
+                queue: self.queue,
+                resultHandler: { (result, error) in
+                    if let error = error {
+                        self.logger.error("Failed to retrieve ownership proof: \(error)")
+                        return completion(.failure(cause: SudoProfilesClientError.fromApiOperationError(error: error)))
                     }
-                } else {
-                    result = .failure(cause: OwnershipProofIssuerError.graphQLError(description: message))
-                }
 
-                return completion(result)
-            }
+                    guard let result = result else {
+                        return completion(.failure(cause: SudoProfilesClientError.fatalError(description: "Mutation completed successfully but result is missing.")))
+                    }
 
-            guard let jwt = result.data?.getOwnershipProof?.jwt else {
-                return completion(.failure(cause: SudoProfilesClientError.fatalError(description: "Mutation result did not contain required object.")))
-            }
+                    if let error = result.errors?.first {
+                        self.logger.error("Failed to retrieve ownership proof: \(error)")
+                        return completion(.failure(cause: SudoProfilesClientError.fromApiOperationError(error: error)))
+                    }
 
-            completion(.success(jwt: jwt))
+                    guard let jwt = result.data?.getOwnershipProof?.jwt else {
+                        return completion(.failure(cause: SudoProfilesClientError.fatalError(description: "Mutation result did not contain required object.")))
+                    }
+
+                    completion(.success(jwt: jwt))
+                })
+        } catch {
+            throw SudoProfilesClientError.fromApiOperationError(error: error)
         }
     }
 
@@ -165,7 +137,7 @@ public class ClientOwnershipProofIssuer: OwnershipProofIssuer {
         privateKey = privateKey.replacingOccurrences(of: "-----END RSA PRIVATE KEY-----", with: "")
 
         guard let keyData = Data(base64Encoded: privateKey) else {
-            throw OwnershipProofIssuerError.invalidConfig
+            throw SudoProfilesClientError.invalidConfig
         }
 
         self.keyManager = keyManager

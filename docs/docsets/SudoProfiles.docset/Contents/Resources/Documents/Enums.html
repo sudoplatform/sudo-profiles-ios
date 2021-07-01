@@ -21,7 +21,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
-          SudoProfiles 10.2.2 Docs
+          SudoProfiles 11.0.0 Docs
         </a>
         
       </p>
@@ -65,19 +65,10 @@
             <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles06DeleteA5ErrorO">DeleteSudoError</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles23GetOwnershipProofResultO">GetOwnershipProofResult</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles10ListOptionO">ListOption</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles25OwnershipProofIssuerErrorO">OwnershipProofIssuerError</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles16RedeemTokenErrorO">RedeemTokenError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles11S3ApiResultO">S3ApiResult</a>
@@ -101,13 +92,10 @@
                 <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles0A14OperationErrorO">SudoOperationError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles0aB11ClientErrorO">SudoProfilesClientError</a>
+                <a class="nav-group-task-link" href="Enums/SudoProfilesClientError.html">SudoProfilesClientError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles31SymmetricKeyEncryptionAlgorithmO">SymmetricKeyEncryptionAlgorithm</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles06UpdateA5ErrorO">UpdateSudoError</a>
               </li>
             </ul>
           </li>
@@ -200,75 +188,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles06DeleteA5ErrorO"></a>
-                    <a name="//apple_ref/swift/Enum/DeleteSudoError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles06DeleteA5ErrorO">DeleteSudoError</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List of possible errors returned by <code>DeleteSudo</code> operation.</p>
-
-<ul>
-<li>sudoNotFound: Indicates that the specified Sudo could not be found.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">DeleteSudoError</span> <span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles25OwnershipProofIssuerErrorO"></a>
-                    <a name="//apple_ref/swift/Enum/OwnershipProofIssuerError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles25OwnershipProofIssuerErrorO">OwnershipProofIssuerError</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List of possible errors thrown by <code>OwnershipProofIssuer</code> implementation.</p>
-
-<ul>
-<li>invalidConfig: Indicates the input to initializing or configuring the issuer was invalid.</li>
-<li>sudoNotFound: Indicates the specified Sudo does not exists.</li>
-<li>graphQLError: Sudo service&rsquo;s GraphQL endpoint returned an error.</li>
-<li>insufficientEntitlementsError: Indicates that the user is over-entitled  and cannot be issued an ownership proof
-    until the user purchases additional entitlements or delete existing Sudos.</li>
-<li>serviceError: Indicates that an internal server error caused the operation to fail. The error is
-possibly transient and retrying at a later time may cause the operation to complete
-successfully</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">OwnershipProofIssuerError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:12SudoProfiles23GetOwnershipProofResultO"></a>
                     <a name="//apple_ref/swift/Enum/GetOwnershipProofResult" class="dashAnchor"></a>
                     <a class="token" href="#/s:12SudoProfiles23GetOwnershipProofResultO">GetOwnershipProofResult</a>
@@ -293,38 +212,6 @@ with an error or return a signed proof in form of JWT.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">GetOwnershipProofResult</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles16RedeemTokenErrorO"></a>
-                    <a name="//apple_ref/swift/Enum/RedeemTokenError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles16RedeemTokenErrorO">RedeemTokenError</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List of possible errors returned by <code>RedeemToken</code> operation.</p>
-
-<ul>
-<li>invalidToken: Indicates that the token or the token type was invalid.</li>
-<li>invalidUserType: Indicates the signed in user is not of the correct type to redeem a token..</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RedeemTokenError</span> <span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
 
                         </div>
                       </div>
@@ -476,15 +363,6 @@ condition or other conditions that is beyond control of <code><a href="Protocols
 
 <ul>
 <li>preconditionFailure: One of preconditions of the operation was not met.</li>
-<li>invalidInput: Input to the operation was invalid.</li>
-<li>insufficientEntitlementsError: Operation failed due to the backend entitlements error. This maybe due to the user not
-having sufficient entitlements or exceeding some other service limit.</li>
-<li>graphQLError: Sudo service&rsquo;s GraphQL endpoint returned an error.</li>
-<li>serviceError: Indicates that an internal server error caused the operation to fail. The error is
-possibly transient and retrying at a later time may cause the operation to complete
-successfully.</li>
-<li>fatalError: Indicates that a fatal error occurred. This could be due to coding error, out-of-memory
-condition or other conditions that is beyond control of <code><a href="Protocols/SudoProfilesClient.html">SudoProfilesClient</a></code> implementation.</li>
 </ul>
 
                       </div>
@@ -515,7 +393,6 @@ condition or other conditions that is beyond control of <code><a href="Protocols
                         <p>List of possible errors thrown by <code><a href="Protocols/SudoProfilesClient.html">SudoProfilesClient</a></code> implementation.</p>
 
 <ul>
-<li>invalidConfig: Indicates that the configuration dictionary passed to initialize the client was not valid.</li>
 <li>sudoServiceConfigNotFound: Indicates the configuration related to Sudo Service is not found.
 This may indicate that Sudo Service is not deployed into your runtime instance or the config
 file that you are using is invalid..</li>
@@ -527,6 +404,7 @@ file that you are using is invalid..</li>
 condition or other conditions that is beyond control of <code><a href="Protocols/SudoProfilesClient.html">SudoProfilesClient</a></code> implementation.</li>
 </ul>
 
+                        <a href="Enums/SudoProfilesClientError.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -638,40 +516,6 @@ unsubscribed so the consumer must re-subscribe.</li>
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles06UpdateA5ErrorO"></a>
-                    <a name="//apple_ref/swift/Enum/UpdateSudoError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles06UpdateA5ErrorO">UpdateSudoError</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List of possible errors returned by <code>UpdateSudo</code> operation.</p>
-
-<ul>
-<li>sudoNotFound: Indicates that the specified Sudo could not be found.</li>
-<li>versionMismatch: Indicates the version of the Sudo that is getting updated does not match
-the current version of the Sudo stored in the backend. The caller should retrieve the
-current version of the Sudo and reconcile the difference..</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">UpdateSudoError</span> <span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
@@ -680,7 +524,7 @@ current version of the Sudo and reconcile the difference..</li>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2021 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2021-06-24)</p>
+      <p>&copy; 2021 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2021-07-01)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

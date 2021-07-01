@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SudoOperation Class Reference</title>
+    <title>SudoProfilesClientError Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Class/SudoOperation" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Enum/SudoProfilesClientError" class="dashAnchor"></a>
 
-    <a title="SudoOperation Class Reference"></a>
+    <a title="SudoProfilesClientError Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">SudoProfiles Reference</a>
       <img class="carat" src="../img/carat.png" />
-      SudoOperation Class Reference
+      SudoProfilesClientError Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -148,15 +148,26 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>SudoOperation</h1>
+            <h1>SudoProfilesClientError</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">SudoOperation</span> <span class="p">:</span> <span class="kt">Operation</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SudoProfilesClientError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                 </div>
               </div>
-            <p>Custom base operation for Sudo lifecycle operations. Provides common functionality
-that all subclasses are expected to provide.</p>
+            <p>List of possible errors thrown by <code><a href="../Protocols/SudoProfilesClient.html">SudoProfilesClient</a></code> implementation.</p>
+
+<ul>
+<li>sudoServiceConfigNotFound: Indicates the configuration related to Sudo Service is not found.
+This may indicate that Sudo Service is not deployed into your runtime instance or the config
+file that you are using is invalid..</li>
+<li>invalidInput: Indicates that the input to the API was invalid.</li>
+<li>notSignedIn: Indicates the API being called requires the client to sign in.</li>
+<li>badData: Indicates the bad data was found in cache or in backend response.</li>
+<li>graphQLError: Indicates that a GraphQL error was returned by the backend.</li>
+<li>fatalError: Indicates that a fatal error occurred. This could be due to coding error, out-of-memory
+condition or other conditions that is beyond control of <code><a href="../Protocols/SudoProfilesClient.html">SudoProfilesClient</a></code> implementation.</li>
+</ul>
 
           </div>
         </section>
@@ -168,9 +179,9 @@ that all subclasses are expected to provide.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC5stateAA0aC5StateOvp"></a>
-                    <a name="//apple_ref/swift/Property/state" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC5stateAA0aC5StateOvp">state</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO13invalidConfigyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidConfig" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO13invalidConfigyA2CmF">invalidConfig</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -178,14 +189,14 @@ that all subclasses are expected to provide.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Operation state.</p>
+                        <p>Indicates that the configuration dictionary passed to initialize the client was not valid.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">SudoOperationState</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidConfig</span></code></pre>
 
                         </div>
                       </div>
@@ -195,9 +206,9 @@ that all subclasses are expected to provide.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC2idSSvp"></a>
-                    <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC2idSSvp">id</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO25sudoServiceConfigNotFoundyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/sudoServiceConfigNotFound" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO25sudoServiceConfigNotFoundyA2CmF">sudoServiceConfigNotFound</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -205,14 +216,15 @@ that all subclasses are expected to provide.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Operation ID.</p>
+                        <p>Indicates the configuration related to Sudo Service is not found. This may indicate that Sudo Service
+is not deployed into your runtime instance or the config file that you are using is invalid..</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">sudoServiceConfigNotFound</span></code></pre>
 
                         </div>
                       </div>
@@ -222,9 +234,9 @@ that all subclasses are expected to provide.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC10queuedTime10Foundation4DateVvp"></a>
-                    <a name="//apple_ref/swift/Property/queuedTime" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC10queuedTime10Foundation4DateVvp">queuedTime</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO12invalidInputyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/invalidInput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO12invalidInputyA2CmF">invalidInput</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -232,14 +244,14 @@ that all subclasses are expected to provide.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Time at which the operation was queued.</p>
+                        <p>Indicates that the input to the API was invalid.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">queuedTime</span><span class="p">:</span> <span class="kt">Date</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidInput</span></code></pre>
 
                         </div>
                       </div>
@@ -249,9 +261,9 @@ that all subclasses are expected to provide.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC9startTime10Foundation4DateVvp"></a>
-                    <a name="//apple_ref/swift/Property/startTime" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC9startTime10Foundation4DateVvp">startTime</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO11accountLockyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/accountLock" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO11accountLockyA2CmF">accountLock</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -259,14 +271,14 @@ that all subclasses are expected to provide.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Operation start time.</p>
+                        <p>Indicates the requested operation failed because the user account is locked.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">startTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">accountLock</span></code></pre>
 
                         </div>
                       </div>
@@ -276,9 +288,9 @@ that all subclasses are expected to provide.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC10finishTime10Foundation4DateVvp"></a>
-                    <a name="//apple_ref/swift/Property/finishTime" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC10finishTime10Foundation4DateVvp">finishTime</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO11notSignedInyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/notSignedIn" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO11notSignedInyA2CmF">notSignedIn</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -286,14 +298,14 @@ that all subclasses are expected to provide.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Operation finish time.</p>
+                        <p>Indicates the API being called requires the client to sign in.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">finishTime</span><span class="p">:</span> <span class="kt">Date</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">notSignedIn</span></code></pre>
 
                         </div>
                       </div>
@@ -303,9 +315,9 @@ that all subclasses are expected to provide.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC5inputSDySSypGvp"></a>
-                    <a name="//apple_ref/swift/Property/input" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC5inputSDySSypGvp">input</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO13notAuthorizedyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/notAuthorized" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO13notAuthorizedyA2CmF">notAuthorized</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -313,14 +325,15 @@ that all subclasses are expected to provide.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Input parameters</p>
+                        <p>Indicates that the request operation failed due to authorization error. This maybe due to the authentication
+token being invalid or other security controls that prevent the user from accessing the API.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">input</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">notAuthorized</span></code></pre>
 
                         </div>
                       </div>
@@ -330,9 +343,9 @@ that all subclasses are expected to provide.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC6outputSDySSypGvp"></a>
-                    <a name="//apple_ref/swift/Property/output" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC6outputSDySSypGvp">output</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO024insufficientEntitlementsD0yA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/insufficientEntitlementsError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO024insufficientEntitlementsD0yA2CmF">insufficientEntitlementsError</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -340,14 +353,14 @@ that all subclasses are expected to provide.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Output parameters.</p>
+                        <p>Indicates that the user does not have sufficient entitlements to perform the requested operation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">output</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">insufficientEntitlementsError</span></code></pre>
 
                         </div>
                       </div>
@@ -357,9 +370,9 @@ that all subclasses are expected to provide.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC5errors5Error_pSgvp"></a>
-                    <a name="//apple_ref/swift/Property/error" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC5errors5Error_pSgvp">error</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO15versionMismatchyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/versionMismatch" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO15versionMismatchyA2CmF">versionMismatch</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -367,14 +380,15 @@ that all subclasses are expected to provide.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Operation error.</p>
+                        <p>Indicates the version of the Sudo that is getting updated does not match the current version of the Sudo stored
+in the backend. The caller should retrieve the current version of the Sudo and reconcile the difference..</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">versionMismatch</span></code></pre>
 
                         </div>
                       </div>
@@ -384,9 +398,9 @@ that all subclasses are expected to provide.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC4doneyyF"></a>
-                    <a name="//apple_ref/swift/Method/done()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC4doneyyF">done()</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO07serviceD0yA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/serviceError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO07serviceD0yA2CmF">serviceError</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -394,16 +408,15 @@ that all subclasses are expected to provide.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Marks the operation as completed. Subclasses are expected to
-call this method whether the operation has completed successfully
-or unsuccessfully.</p>
+                        <p>Indicates that an internal server error caused the operation to fail. The error is possibly transient and
+retrying at a later time may cause the operation to complete successfully</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">done</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">serviceError</span></code></pre>
 
                         </div>
                       </div>
@@ -413,9 +426,9 @@ or unsuccessfully.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC21evaluatePreconditionsSbyF"></a>
-                    <a name="//apple_ref/swift/Method/evaluatePreconditions()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC21evaluatePreconditionsSbyF">evaluatePreconditions()</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO13requestFailedyACSo17NSHTTPURLResponseCSg_s0D0_pSgtcACmF"></a>
+                    <a name="//apple_ref/swift/Element/requestFailed(response:cause:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO13requestFailedyACSo17NSHTTPURLResponseCSg_s0D0_pSgtcACmF">requestFailed(response:<wbr>cause:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -423,21 +436,16 @@ or unsuccessfully.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Evaluates preconditions to determined whether or not the operation should
-be started.</p>
+                        <p>Indicates that the request failed due to connectivity, availability or access error.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">evaluatePreconditions</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">requestFailed</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt">HTTPURLResponse</span><span class="p">?,</span> <span class="nv">cause</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>true</code> if all preconditions have been met.</p>
                       </div>
                     </section>
                   </div>
@@ -445,9 +453,9 @@ be started.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0A9OperationC7executeyyF"></a>
-                    <a name="//apple_ref/swift/Method/execute()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A9OperationC7executeyyF">execute()</a>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO17rateLimitExceededyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/rateLimitExceeded" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO17rateLimitExceededyA2CmF">rateLimitExceeded</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -455,14 +463,123 @@ be started.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Executes the operation. Subclasses must override this method.</p>
+                        <p>Indicates that there were too many attempts at sending API requests within a short period of time.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">execute</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">rateLimitExceeded</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO7badDatayA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/badData" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO7badDatayA2CmF">badData</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates the bad data was found in cache or in backend response.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">badData</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO12sudoNotFoundyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/sudoNotFound" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO12sudoNotFoundyA2CmF">sudoNotFound</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates the specified Sudo was not found.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">sudoNotFound</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO12graphQLErroryACSS_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/graphQLError(description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO12graphQLErroryACSS_tcACmF">graphQLError(description:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates that a GraphQL error was returned by the backend.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">graphQLError</span><span class="p">(</span><span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12SudoProfiles0aB11ClientErrorO05fatalD0yACSS_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/fatalError(description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB11ClientErrorO05fatalD0yACSS_tcACmF">fatalError(description:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates that a fatal error occurred. This could be due to coding error, out-of-memory condition or other
+conditions that is beyond control of <code><a href="../Protocols/SudoProfilesClient.html">SudoProfilesClient</a></code> implementation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">fatalError</span><span class="p">(</span><span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>

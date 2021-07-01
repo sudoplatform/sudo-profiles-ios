@@ -10,22 +10,8 @@ import SudoLogging
 /// List of possible errors returned by `SudoOperation` and its subclasses.
 ///
 /// - preconditionFailure: One of preconditions of the operation was not met.
-/// - invalidInput: Input to the operation was invalid.
-/// - insufficientEntitlementsError: Operation failed due to the backend entitlements error. This maybe due to the user not
-///     having sufficient entitlements or exceeding some other service limit.
-/// - graphQLError: Sudo service's GraphQL endpoint returned an error.
-/// - serviceError: Indicates that an internal server error caused the operation to fail. The error is
-///     possibly transient and retrying at a later time may cause the operation to complete
-///     successfully.
-/// - fatalError: Indicates that a fatal error occurred. This could be due to coding error, out-of-memory
-///     condition or other conditions that is beyond control of `SudoProfilesClient` implementation.
 public enum SudoOperationError: Error, Hashable {
     case preconditionFailure
-    case invalidInput
-    case insufficientEntitlementsError
-    case serviceError
-    case graphQLError(description: String)
-    case fatalError(description: String)
 }
 
 public enum SudoOperationState: Int {
@@ -37,12 +23,6 @@ public enum SudoOperationState: Int {
 /// Custom base operation for Sudo lifecycle operations. Provides common functionality
 /// that all subclasses are expected to provide.
 open class SudoOperation: Operation {
-
-    struct SudoServiceError {
-        static let type = "errorType"
-        static let serviceError = "sudoplatform.ServiceError"
-        static let insufficientEntitlementsError = "sudoplatform.InsufficientEntitlementsError"
-    }
 
     private struct Constants {
         static let IsExecuting = "isExecuting"

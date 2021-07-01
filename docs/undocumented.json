@@ -22,80 +22,24 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/DeleteSudo.swift",
-      "line": 15,
-      "symbol": "DeleteSudoError.sudoNotFound",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 24,
-      "symbol": "OwnershipProofIssuerError.invalidConfig",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 25,
-      "symbol": "OwnershipProofIssuerError.serviceError",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 26,
-      "symbol": "OwnershipProofIssuerError.sudoNotFound",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 27,
-      "symbol": "OwnershipProofIssuerError.insufficientEntitlementsError",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 28,
-      "symbol": "OwnershipProofIssuerError.graphQLError(description:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 37,
+      "line": 20,
       "symbol": "GetOwnershipProofResult.success(jwt:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 38,
+      "line": 21,
       "symbol": "GetOwnershipProofResult.failure(cause:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/OwnershipProofIssuer.swift",
-      "line": 45,
+      "line": 28,
       "symbol": "OwnershipProofIssuer",
       "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/RedeemToken.swift",
-      "line": 16,
-      "symbol": "RedeemTokenError.invalidToken",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/RedeemToken.swift",
-      "line": 17,
-      "symbol": "RedeemTokenError.invalidUserType",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
@@ -184,203 +128,119 @@
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 23,
+      "line": 14,
       "symbol": "SudoOperationError.preconditionFailure",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 24,
-      "symbol": "SudoOperationError.invalidInput",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 25,
-      "symbol": "SudoOperationError.insufficientEntitlementsError",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 26,
-      "symbol": "SudoOperationError.serviceError",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 27,
-      "symbol": "SudoOperationError.graphQLError(description:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 28,
-      "symbol": "SudoOperationError.fatalError(description:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 31,
+      "line": 17,
       "symbol": "SudoOperationState",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 98,
+      "line": 78,
       "symbol": "SudoOperation.copyDependenciesOutputAsInput",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 100,
+      "line": 80,
       "symbol": "SudoOperation.isReady",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 104,
+      "line": 84,
       "symbol": "SudoOperation.isExecuting",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 110,
+      "line": 90,
       "symbol": "SudoOperation.isCancelled",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 114,
+      "line": 94,
       "symbol": "SudoOperation.isFinished",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 118,
+      "line": 98,
       "symbol": "SudoOperation.isAsynchronous",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 122,
+      "line": 102,
       "symbol": "SudoOperation.init(logger:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 175,
+      "line": 155,
       "symbol": "SudoOperation.start()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoOperation.swift",
-      "line": 209,
+      "line": 189,
       "symbol": "SudoOperation.cancel()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 29,
-      "symbol": "SudoProfilesClientError.invalidConfig",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 30,
-      "symbol": "SudoProfilesClientError.sudoServiceConfigNotFound",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 31,
-      "symbol": "SudoProfilesClientError.invalidInput",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 32,
-      "symbol": "SudoProfilesClientError.notSignedIn",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 33,
-      "symbol": "SudoProfilesClientError.badData",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 34,
-      "symbol": "SudoProfilesClientError.graphQLError(description:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 35,
-      "symbol": "SudoProfilesClientError.fatalError(description:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 44,
+      "line": 136,
       "symbol": "ListOption.cacheOnly",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 45,
+      "line": 137,
       "symbol": "ListOption.remoteOnly",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 46,
+      "line": 138,
       "symbol": "ListOption.returnCachedElseFetch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 169,
+      "line": 261,
       "symbol": "DefaultSudoProfilesClient.CacheType",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 174,
+      "line": 266,
       "symbol": "DefaultSudoProfilesClient.Config",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClientConfigProvider.swift",
-      "line": 13,
+      "line": 14,
       "symbol": "SudoProfilesClientConfigProvider.Config",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
@@ -571,20 +431,6 @@
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoSubscriber.swift",
       "line": 27,
       "symbol": "SubscriptionConnectionState.disconnected",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/UpdateSudo.swift",
-      "line": 19,
-      "symbol": "UpdateSudoError.sudoNotFound",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/UpdateSudo.swift",
-      "line": 20,
-      "symbol": "UpdateSudoError.versionMismatch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     }

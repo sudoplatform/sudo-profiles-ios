@@ -8,12 +8,13 @@ import Foundation
 import AWSAppSync
 import SudoUser
 import SudoLogging
+import SudoApiClient
 
 /// Operation to create a new Sudo.
 class CreateSudo: SudoOperation {
 
     private unowned let cryptoProvider: CryptoProvider
-    private unowned let graphQLClient: AWSAppSyncClient
+    private unowned let graphQLClient: SudoApiClient
 
     private let region: String
     private let bucket: String
@@ -32,7 +33,7 @@ class CreateSudo: SudoOperation {
     ///   - identityId: ID of identity to own the blob in AWS S3.
     ///   - sudo: Sudo to create.
     init(cryptoProvider: CryptoProvider,
-         graphQLClient: AWSAppSyncClient,
+         graphQLClient: SudoApiClient,
          logger: Logger = Logger.sudoProfilesClientLogger,
          region: String,
          bucket: String,
@@ -72,49 +73,44 @@ class CreateSudo: SudoOperation {
 
         self.logger.info("Creating a Sudo.")
         let input = CreateSudoInput(claims: secureClaims, objects: secureS3Objects)
-        self.graphQLClient.perform(mutation: CreateSudoMutation(input: input), queue: self.queue) { (result, error) in
-            if let error = error {
-                self.logger.error("Failed to create a Sudo: \(error)")
-                self.error = error
-                return self.done()
-            }
-
-            guard let result = result else {
-                self.error = SudoOperationError.fatalError(description: "Mutation completed successfully but result is missing.")
-                return self.done()
-            }
-
-            if let error = result.errors?.first {
-                let message = "Failed to create a Sudo: \(error)"
-                self.logger.error(message)
-
-                if let errorType = error[SudoOperation.SudoServiceError.type] as? String {
-                    switch errorType {
-                    case SudoOperation.SudoServiceError.insufficientEntitlementsError:
-                        self.error = SudoOperationError.insufficientEntitlementsError
-                    case SudoOperation.SudoServiceError.serviceError:
-                        self.error = SudoOperationError.serviceError
-                    default:
-                        self.error = SudoOperationError.graphQLError(description: message)
+        do {
+            try self.graphQLClient.perform(
+                mutation: CreateSudoMutation(input: input),
+                queue: self.queue,
+                resultHandler: { (result, error) in
+                    if let error = error {
+                        self.logger.error("Failed to create a Sudo: \(error)")
+                        self.error = SudoProfilesClientError.fromApiOperationError(error: error)
+                        return self.done()
                     }
-                } else {
-                    self.error = SudoOperationError.graphQLError(description: message)
+
+                    guard let result = result else {
+                        self.error = SudoProfilesClientError.fatalError(description: "Mutation completed successfully but result is missing.")
+                        return self.done()
+                    }
+
+                    if let error = result.errors?.first {
+                        self.logger.error("Failed to create a Sudo: \(error)")
+                        self.error = SudoProfilesClientError.fromApiOperationError(error: error)
+                        return self.done()
+                    }
+
+                    guard let sudo = result.data?.createSudo else {
+                        self.error = SudoProfilesClientError.fatalError(description: "Mutation result did not contain required object.")
+                        return self.done()
+                    }
+
+                    self.sudo.id = sudo.id
+                    self.sudo.version = sudo.version
+                    self.sudo.createdAt = Date(millisecondsSinceEpoch: sudo.createdAtEpochMs)
+                    self.sudo.updatedAt = Date(millisecondsSinceEpoch: sudo.updatedAtEpochMs)
+
+                    self.logger.info("Sudo created successfully.")
+                    self.done()
                 }
-
-                return self.done()
-            }
-
-            guard let sudo = result.data?.createSudo else {
-                self.error = SudoOperationError.fatalError(description: "Mutation result did not contain required object.")
-                return self.done()
-            }
-
-            self.sudo.id = sudo.id
-            self.sudo.version = sudo.version
-            self.sudo.createdAt = Date(millisecondsSinceEpoch: sudo.createdAtEpochMs)
-            self.sudo.updatedAt = Date(millisecondsSinceEpoch: sudo.updatedAtEpochMs)
-
-            self.logger.info("Sudo created successfully.")
+            )
+        } catch {
+            self.error = SudoProfilesClientError.fromApiOperationError(error: error)
             self.done()
         }
     }

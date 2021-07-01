@@ -7,25 +7,12 @@
 import Foundation
 import AWSAppSync
 import SudoLogging
-
-/// List of possible errors returned by `RedeemToken` operation.
-///
-/// - invalidToken: Indicates that the token or the token type was invalid.
-/// - invalidUserType: Indicates the signed in user is not of the correct type to redeem a token..
-public enum RedeemTokenError: Error, Hashable {
-    case invalidToken
-    case invalidUserType
-}
+import SudoApiClient
 
 /// Operation to redeem a token for entitlements.
 class RedeemToken: SudoOperation {
 
-    private struct Constants {
-        static let invalidTokenError = "sudoplatform.InvalidTokenError"
-        static let invalidUserTypeError = "sudoplatform.InvalidUserTypeError"
-    }
-
-    private unowned let graphQLClient: AWSAppSyncClient
+    private unowned let graphQLClient: SudoApiClient
 
     var token: String
     var type: String
@@ -38,59 +25,50 @@ class RedeemToken: SudoOperation {
     ///   - logger: Logger to use for logging.
     ///   - token: Token to redeem.
     ///   - type: Token type.
-    init(graphQLClient: AWSAppSyncClient,
+    init(graphQLClient: SudoApiClient,
          logger: Logger = Logger.sudoProfilesClientLogger,
          token: String,
          type: String) {
         self.graphQLClient = graphQLClient
         self.token = token
         self.type = type
-
         super.init(logger: logger)
     }
 
     override func execute() {
-        self.graphQLClient.perform(mutation: RedeemTokenMutation(input: RedeemTokenInput(token: self.token, type: self.type)), queue: self.queue) { (result, error) in
-            if let error = error {
-                self.logger.error("Failed to redeem a token for entitlements: \(error)")
-                self.error = error
-                return self.done()
-            }
-
-            guard let result = result else {
-                self.error = SudoOperationError.fatalError(description: "Mutation completed successfully but result is missing.")
-                return self.done()
-            }
-
-            if let error = result.errors?.first {
-                let message = "Failed to redeem a token for entitlements: \(error)"
-                self.logger.error(message)
-
-                if let errorType = error[SudoOperation.SudoServiceError.type] as? String {
-                    switch errorType {
-                    case Constants.invalidTokenError:
-                        self.error = RedeemTokenError.invalidToken
-                    case Constants.invalidUserTypeError:
-                        self.error = RedeemTokenError.invalidUserType
-                    case SudoOperation.SudoServiceError.serviceError:
-                        self.error = SudoOperationError.serviceError
-                    default:
-                        self.error = SudoOperationError.graphQLError(description: message)
+        do {
+            try self.graphQLClient.perform(
+                mutation: RedeemTokenMutation(input: RedeemTokenInput(token: self.token, type: self.type)),
+                queue: self.queue, resultHandler: { (result, error) in
+                    if let error = error {
+                        self.logger.error("Failed to redeem a token for entitlements: \(error)")
+                        self.error = SudoProfilesClientError.fromApiOperationError(error: error)
+                        return self.done()
                     }
-                } else {
-                    self.error = SudoOperationError.graphQLError(description: message)
+
+                    guard let result = result else {
+                        self.error = SudoProfilesClientError.fatalError(description: "Mutation completed successfully but result is missing.")
+                        return self.done()
+                    }
+
+                    if let error = result.errors?.first {
+                        self.logger.error("Failed to redeem a token for entitlements: \(error)")
+                        self.error = SudoProfilesClientError.fromApiOperationError(error: error)
+                        return self.done()
+                    }
+
+                    guard let data = result.data else {
+                        self.error = SudoProfilesClientError.fatalError(description: "Mutation result did not contain required object.")
+                        return self.done()
+                    }
+
+                    self.logger.info("Token redeemed successfully.")
+                    self.entitlements = data.redeemToken.map { Entitlement(name: $0.name, value: $0.value) }
+                    self.done()
                 }
-
-                return self.done()
-            }
-
-            guard let data = result.data else {
-                self.error = SudoOperationError.fatalError(description: "Mutation result did not contain required object.")
-                return self.done()
-            }
-
-            self.logger.info("Token redeemed successfully.")
-            self.entitlements = data.redeemToken.map { Entitlement(name: $0.name, value: $0.value) }
+            )
+        } catch {
+            self.error = SudoProfilesClientError.fromApiOperationError(error: error)
             self.done()
         }
     }

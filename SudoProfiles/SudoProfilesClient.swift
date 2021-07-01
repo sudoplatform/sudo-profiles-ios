@@ -15,7 +15,6 @@ import SudoApiClient
 
 /// List of possible errors thrown by `SudoProfilesClient` implementation.
 ///
-/// - invalidConfig: Indicates that the configuration dictionary passed to initialize the client was not valid.
 /// - sudoServiceConfigNotFound: Indicates the configuration related to Sudo Service is not found.
 ///     This may indicate that Sudo Service is not deployed into your runtime instance or the config
 ///     file that you are using is invalid..
@@ -26,13 +25,106 @@ import SudoApiClient
 /// - fatalError: Indicates that a fatal error occurred. This could be due to coding error, out-of-memory
 ///     condition or other conditions that is beyond control of `SudoProfilesClient` implementation.
 public enum SudoProfilesClientError: Error {
+
+    /// Indicates that the configuration dictionary passed to initialize the client was not valid.
     case invalidConfig
+
+    /// Indicates the configuration related to Sudo Service is not found. This may indicate that Sudo Service
+    /// is not deployed into your runtime instance or the config file that you are using is invalid..
     case sudoServiceConfigNotFound
+
+    /// Indicates that the input to the API was invalid.
     case invalidInput
+
+    /// Indicates the requested operation failed because the user account is locked.
+    case accountLock
+
+    /// Indicates the API being called requires the client to sign in.
     case notSignedIn
+
+    /// Indicates that the request operation failed due to authorization error. This maybe due to the authentication
+    /// token being invalid or other security controls that prevent the user from accessing the API.
+    case notAuthorized
+
+    /// Indicates that the user does not have sufficient entitlements to perform the requested operation.
+    case insufficientEntitlementsError
+
+    /// Indicates the version of the Sudo that is getting updated does not match the current version of the Sudo stored
+    /// in the backend. The caller should retrieve the current version of the Sudo and reconcile the difference..
+    case versionMismatch
+
+    /// Indicates that an internal server error caused the operation to fail. The error is possibly transient and
+    /// retrying at a later time may cause the operation to complete successfully
+    case serviceError
+
+    /// Indicates that the request failed due to connectivity, availability or access error.
+    case requestFailed(response: HTTPURLResponse?, cause: Error?)
+
+    /// Indicates that there were too many attempts at sending API requests within a short period of time.
+    case rateLimitExceeded
+
+    /// Indicates the bad data was found in cache or in backend response.
     case badData
+
+    /// Indicates the specified Sudo was not found.
+    case sudoNotFound
+
+    /// Indicates that a GraphQL error was returned by the backend.
     case graphQLError(description: String)
+
+    /// Indicates that a fatal error occurred. This could be due to coding error, out-of-memory condition or other
+    /// conditions that is beyond control of `SudoProfilesClient` implementation.
     case fatalError(description: String)
+}
+
+extension SudoProfilesClientError {
+
+    struct Constants {
+        static let errorType = "errorType"
+        static let sudoNotFoundError = "sudoplatform.sudo.SudoNotFound"
+        static let conditionalCheckFailedException = "DynamoDB:ConditionalCheckFailedException"
+        static let invalidTokenError = "sudoplatform.InvalidTokenError"
+        static let invalidUserTypeError = "sudoplatform.InvalidUserTypeError"
+    }
+
+    static func fromApiOperationError(error: Error) -> SudoProfilesClientError {
+        switch error {
+        case ApiOperationError.accountLocked:
+            return .accountLock
+        case ApiOperationError.notSignedIn:
+            return .notSignedIn
+        case ApiOperationError.notAuthorized:
+            return .notAuthorized
+        case ApiOperationError.insufficientEntitlementsError:
+            return .insufficientEntitlementsError
+        case ApiOperationError.serviceError:
+            return .serviceError
+        case ApiOperationError.invalidRequest:
+            return .invalidInput
+        case ApiOperationError.rateLimitExceeded:
+            return .rateLimitExceeded
+        case ApiOperationError.graphQLError(let cause):
+            guard let errorType = cause[Constants.errorType] as? String else {
+              return .fatalError(description: "GraphQL operation failed but error type was not found in the response. \(error)")
+            }
+
+            switch errorType {
+            case Constants.sudoNotFoundError:
+                return .sudoNotFound
+            case Constants.conditionalCheckFailedException:
+                return .versionMismatch
+            case Constants.invalidTokenError, Constants.invalidUserTypeError:
+                return .invalidInput
+            default:
+                return .graphQLError(description: "Unexpected GraphQL error: \(cause)")
+            }
+        case ApiOperationError.requestFailed(let response, let cause):
+            return .requestFailed(response: response, cause: cause)
+        default:
+            return .fatalError(description: "Unexpected API operation error: \(error)")
+        }
+    }
+
 }
 
 /// Options for controlling the behaviour of `listSudos` API.
@@ -216,7 +308,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
     private var cryptoProvider: CryptoProvider
 
     /// GraphQL client for communicating with the Sudo  service.
-    private let graphQLClient: AWSAppSyncClient
+    private let graphQLClient: SudoApiClient
 
     /// Wrapper client for S3 access.
     private let s3Client: S3Client
@@ -266,7 +358,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         }
 
         // Use the singleton AppSync client instance if we are using the config file.
-        guard let graphQLClient = try ApiClientManager.instance?.getClient(sudoUserClient: sudoUserClient) else {
+        guard let graphQLClient = try SudoApiClientManager.instance?.getClient(sudoUserClient: sudoUserClient) else {
             throw SudoProfilesClientError.invalidConfig
         }
 
@@ -289,7 +381,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
     ///   - s3Client: Optional S3 client to use. Mainly use for unit testing.
     ///   - ownershipProofIssuer: Optional ownership proof issuer to use. Mainly use for testing of various service clients.
     /// - Throws: `SudoProfilesClientError`
-    public init(config: [String: Any], sudoUserClient: SudoUserClient, cacheType: CacheType = .disk, blobContainerURL: URL, maxSudos: Int = 10, logger: Logger? = nil, cryptoProvider: CryptoProvider? = nil, graphQLClient: AWSAppSyncClient? = nil, s3Client: S3Client? = nil, ownershipProofIssuer: OwnershipProofIssuer? = nil) throws {
+    public init(config: [String: Any], sudoUserClient: SudoUserClient, cacheType: CacheType = .disk, blobContainerURL: URL, maxSudos: Int = 10, logger: Logger? = nil, cryptoProvider: CryptoProvider? = nil, graphQLClient: SudoApiClient? = nil, s3Client: S3Client? = nil, ownershipProofIssuer: OwnershipProofIssuer? = nil) throws {
 
         #if DEBUG
             AWSDDLog.sharedInstance.logLevel = .verbose
@@ -490,28 +582,34 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
             cachePolicy = .returnCacheDataElseFetch
         }
 
-        self.graphQLClient.fetch(query: self.defaultQuery, cachePolicy: cachePolicy) { (result, error) in
-            if let error = error {
-                return completion(.failure(error))
-            }
+        do {
+            try self.graphQLClient.fetch(
+                query: self.defaultQuery,
+                cachePolicy: cachePolicy,
+                resultHandler: { (result, error) in
+                    if let error = error {
+                        return completion(.failure(SudoProfilesClientError.fromApiOperationError(error: error)))
+                    }
 
-            guard let result = result else {
-                return completion(.success([]))
-            }
+                    guard let result = result else {
+                        return completion(.success([]))
+                    }
 
-            if let errors = result.errors {
-                let message = "listSudos query failed with errors: \(errors)"
-                self.logger.error(message)
-                return completion(.failure(SudoProfilesClientError.graphQLError(description: message)))
-            }
+                    if let error = result.errors?.first {
+                        self.logger.error("listSudos query failed with errors: \(error)")
+                        return completion(.failure(SudoProfilesClientError.fromApiOperationError(error: error)))
+                    }
 
-            guard let items = result.data?.listSudos?.items else {
-                return completion(.failure(SudoProfilesClientError.fatalError(description: "Query result contained no list data.")))
-            }
+                    guard let items = result.data?.listSudos?.items else {
+                        return completion(.failure(SudoProfilesClientError.fatalError(description: "Query result contained no list data.")))
+                    }
 
-            self.logger.info("Sudos fetched successfully. Processing the result....")
-
-            self.processListSudosResult(items: items, option: option, processS3Objects: true, completion: completion)
+                    self.logger.info("Sudos fetched successfully. Processing the result....")
+                    self.processListSudosResult(items: items, option: option, processS3Objects: true, completion: completion)
+                }
+            )
+        } catch {
+            throw SudoProfilesClientError.fromApiOperationError(error: error)
         }
     }
 
@@ -532,7 +630,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
     }
 
     public func getOutstandingRequestsCount() -> Int {
-        return self.graphQLClient.queuedMutationCount ?? 0
+        return self.graphQLClient.serialQueue.operationCount
     }
 
     public func reset() throws {

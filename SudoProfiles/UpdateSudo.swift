@@ -8,28 +8,13 @@ import Foundation
 import AWSAppSync
 import SudoUser
 import SudoLogging
-
-/// List of possible errors returned by `UpdateSudo` operation.
-///
-/// - sudoNotFound: Indicates that the specified Sudo could not be found.
-/// - versionMismatch: Indicates the version of the Sudo that is getting updated does not match
-///     the current version of the Sudo stored in the backend. The caller should retrieve the
-///     current version of the Sudo and reconcile the difference..
-public enum UpdateSudoError: Error, Hashable {
-    case sudoNotFound
-    case versionMismatch
-}
+import SudoApiClient
 
 /// Operation to update an existing Sudo.
 class UpdateSudo: SudoOperation {
 
-    private struct Constants {
-        static let sudoNotFoundError = "sudoplatform.sudo.SudoNotFound"
-        static let conditionalCheckFailedException = "DynamoDB:ConditionalCheckFailedException"
-    }
-
     private unowned let cryptoProvider: CryptoProvider
-    private unowned let graphQLClient: AWSAppSyncClient
+    private unowned let graphQLClient: SudoApiClient
 
     private let region: String
     private let bucket: String
@@ -48,7 +33,7 @@ class UpdateSudo: SudoOperation {
     ///   - identityId: ID of identity to own the blob in AWS S3.
     ///   - sudo: Sudo to update.
     init(cryptoProvider: CryptoProvider,
-         graphQLClient: AWSAppSyncClient,
+         graphQLClient: SudoApiClient,
          logger: Logger = Logger.sudoProfilesClientLogger,
          region: String,
          bucket: String,
@@ -99,53 +84,44 @@ class UpdateSudo: SudoOperation {
             expectedVersion: sudo.version
         )
 
-        self.graphQLClient.perform(mutation: UpdateSudoMutation(input: input), queue: self.queue) { (result, error) in
-            if let error = error {
-                self.logger.error("Failed to update a Sudo: \(error)")
-                self.error = error
-                return self.done()
-            }
-
-            guard let result = result else {
-                self.error = SudoOperationError.fatalError(description: "Mutation completed successfully but result is missing.")
-                return self.done()
-            }
-
-            if let error = result.errors?.first {
-                let message = "Failed to update a Sudo: \(error)"
-                self.logger.error(message)
-
-                if let errorType = error[SudoOperation.SudoServiceError.type] as? String {
-                    switch errorType {
-                    case Constants.sudoNotFoundError:
-                        self.error = UpdateSudoError.sudoNotFound
-                    case Constants.conditionalCheckFailedException:
-                        self.error = UpdateSudoError.versionMismatch
-                    case SudoOperation.SudoServiceError.insufficientEntitlementsError:
-                        self.error = SudoOperationError.insufficientEntitlementsError
-                    case SudoOperation.SudoServiceError.serviceError:
-                        self.error = SudoOperationError.serviceError
-                    default:
-                        self.error = SudoOperationError.graphQLError(description: message)
+        do {
+            try self.graphQLClient.perform(
+                mutation: UpdateSudoMutation(input: input),
+                queue: self.queue,
+                resultHandler: { (result, error) in
+                    if let error = error {
+                        self.logger.error("Failed to update a Sudo: \(error)")
+                        self.error = SudoProfilesClientError.fromApiOperationError(error: error)
+                        return self.done()
                     }
-                } else {
-                    self.error = SudoOperationError.graphQLError(description: message)
+
+                    guard let result = result else {
+                        self.error = SudoProfilesClientError.fatalError(description: "Mutation completed successfully but result is missing.")
+                        return self.done()
+                    }
+
+                    if let error = result.errors?.first {
+                        self.logger.error("Failed to update a Sudo: \(error)")
+                        self.error = SudoProfilesClientError.fromApiOperationError(error: error)
+                        return self.done()
+                    }
+
+                    guard let sudo = result.data?.updateSudo else {
+                        self.error = SudoProfilesClientError.fatalError(description: "Mutation result did not contain required object.")
+                        return self.done()
+                    }
+
+                    self.sudo.id = sudo.id
+                    self.sudo.version = sudo.version
+                    self.sudo.createdAt = Date(millisecondsSinceEpoch: sudo.createdAtEpochMs)
+                    self.sudo.updatedAt = Date(millisecondsSinceEpoch: sudo.updatedAtEpochMs)
+
+                    self.logger.info("Sudo updated successfully.")
+                    self.done()
                 }
-
-                return self.done()
-            }
-
-            guard let sudo = result.data?.updateSudo else {
-                self.error = SudoOperationError.fatalError(description: "Mutation result did not contain required object.")
-                return self.done()
-            }
-
-            self.sudo.id = sudo.id
-            self.sudo.version = sudo.version
-            self.sudo.createdAt = Date(millisecondsSinceEpoch: sudo.createdAtEpochMs)
-            self.sudo.updatedAt = Date(millisecondsSinceEpoch: sudo.updatedAtEpochMs)
-
-            self.logger.info("Sudo updated successfully.")
+            )
+        } catch {
+            self.error = SudoProfilesClientError.fromApiOperationError(error: error)
             self.done()
         }
     }
