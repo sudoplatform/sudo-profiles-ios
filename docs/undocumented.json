@@ -205,35 +205,35 @@
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 136,
+      "line": 135,
       "symbol": "ListOption.cacheOnly",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 137,
+      "line": 136,
       "symbol": "ListOption.remoteOnly",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 138,
+      "line": 137,
       "symbol": "ListOption.returnCachedElseFetch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 261,
+      "line": 260,
       "symbol": "DefaultSudoProfilesClient.CacheType",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 266,
+      "line": 265,
       "symbol": "DefaultSudoProfilesClient.Config",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"

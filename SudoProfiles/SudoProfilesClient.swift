@@ -82,7 +82,6 @@ extension SudoProfilesClientError {
     struct Constants {
         static let errorType = "errorType"
         static let sudoNotFoundError = "sudoplatform.sudo.SudoNotFound"
-        static let conditionalCheckFailedException = "DynamoDB:ConditionalCheckFailedException"
         static let invalidTokenError = "sudoplatform.InvalidTokenError"
         static let invalidUserTypeError = "sudoplatform.InvalidUserTypeError"
     }
@@ -103,6 +102,8 @@ extension SudoProfilesClientError {
             return .invalidInput
         case ApiOperationError.rateLimitExceeded:
             return .rateLimitExceeded
+        case ApiOperationError.versionMismatch:
+            return .versionMismatch
         case ApiOperationError.graphQLError(let cause):
             guard let errorType = cause[Constants.errorType] as? String else {
               return .fatalError(description: "GraphQL operation failed but error type was not found in the response. \(error)")
@@ -111,8 +112,6 @@ extension SudoProfilesClientError {
             switch errorType {
             case Constants.sudoNotFoundError:
                 return .sudoNotFound
-            case Constants.conditionalCheckFailedException:
-                return .versionMismatch
             case Constants.invalidTokenError, Constants.invalidUserTypeError:
                 return .invalidInput
             default:
