@@ -47,7 +47,7 @@ public enum SudoProfilesClientError: Error {
     case notAuthorized
 
     /// Indicates that the user does not have sufficient entitlements to perform the requested operation.
-    case insufficientEntitlementsError
+    case insufficientEntitlements
 
     /// Indicates the version of the Sudo that is getting updated does not match the current version of the Sudo stored
     /// in the backend. The caller should retrieve the current version of the Sudo and reconcile the difference..
@@ -94,8 +94,8 @@ extension SudoProfilesClientError {
             return .notSignedIn
         case ApiOperationError.notAuthorized:
             return .notAuthorized
-        case ApiOperationError.insufficientEntitlementsError:
-            return .insufficientEntitlementsError
+        case ApiOperationError.insufficientEntitlements:
+            return .insufficientEntitlements
         case ApiOperationError.serviceError:
             return .serviceError
         case ApiOperationError.invalidRequest:
