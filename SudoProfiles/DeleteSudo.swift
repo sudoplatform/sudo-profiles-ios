@@ -14,6 +14,8 @@ class DeleteSudo: SudoOperation {
 
     private unowned let graphQLClient: SudoApiClient
 
+    private let query: ListSudosQuery
+
     var sudo: Sudo
 
     /// Initializes an operation to delete an existing Sudo.
@@ -21,11 +23,14 @@ class DeleteSudo: SudoOperation {
     /// - Parameters:
     ///   - graphQLClient: GraphQL client to use to interact with Sudo service.
     ///   - logger: Logger to use for logging.
+    ///   - query: Query in the AppSync cache to update.
     ///   - sudo: Sudo to delete.
     init(graphQLClient: SudoApiClient,
          logger: Logger = Logger.sudoProfilesClientLogger,
+         query: ListSudosQuery,
          sudo: Sudo) {
         self.graphQLClient = graphQLClient
+        self.query = query
         self.sudo = sudo
 
         super.init(logger: logger)
@@ -58,6 +63,19 @@ class DeleteSudo: SudoOperation {
                         self.logger.error("Failed to delete a Sudo: \(error)")
                         self.error = SudoProfilesClientError.fromApiOperationError(error: error)
                         return self.done()
+                    }
+
+                    guard let item = result.data?.deleteSudo else {
+                        self.error = SudoProfilesClientError.fatalError(description: "Mutation completed successfully but result is empty.")
+                        return self.done()
+                    }
+
+                    _ = self.graphQLClient.getAppSyncClient().store?.withinReadWriteTransaction { transaction in
+                        try transaction.update(query: self.query) { (data: inout ListSudosQuery.Data) in
+                            // Remove the deleted Sudo from the cache.
+                            let newState = data.listSudos?.items?.filter { $0.id != item.id }
+                            data.listSudos?.items = newState
+                        }
                     }
 
                     self.logger.info("Sudo deleted successfully.")

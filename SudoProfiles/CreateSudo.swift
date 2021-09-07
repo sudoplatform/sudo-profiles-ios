@@ -19,6 +19,7 @@ class CreateSudo: SudoOperation {
     private let region: String
     private let bucket: String
     private let identityId: String
+    private let query: ListSudosQuery
 
     var sudo: Sudo
 
@@ -31,6 +32,7 @@ class CreateSudo: SudoOperation {
     ///   - region: AWS region hosting Sudo service.
     ///   - bucket: Name of S3 bucket to store any blob associated with Sudo.
     ///   - identityId: ID of identity to own the blob in AWS S3.
+    ///   - query: Query in the AppSync cache to update.
     ///   - sudo: Sudo to create.
     init(cryptoProvider: CryptoProvider,
          graphQLClient: SudoApiClient,
@@ -38,12 +40,14 @@ class CreateSudo: SudoOperation {
          region: String,
          bucket: String,
          identityId: String,
+         query: ListSudosQuery,
          sudo: Sudo) {
         self.cryptoProvider = cryptoProvider
         self.graphQLClient = graphQLClient
         self.region = region
         self.bucket = bucket
         self.identityId = identityId
+        self.query = query
         self.sudo = sudo
 
         super.init(logger: logger)
@@ -104,6 +108,51 @@ class CreateSudo: SudoOperation {
                     self.sudo.version = sudo.version
                     self.sudo.createdAt = Date(millisecondsSinceEpoch: sudo.createdAtEpochMs)
                     self.sudo.updatedAt = Date(millisecondsSinceEpoch: sudo.updatedAtEpochMs)
+
+                    let item = ListSudosQuery.Data.ListSudo.Item(id: sudo.id,
+                                                                 claims: sudo.claims.map {
+                                                                    ListSudosQuery.Data.ListSudo.Item.Claim(
+                                                                        name: $0.name,
+                                                                        version: $0.version,
+                                                                        algorithm: $0.algorithm,
+                                                                        keyId: $0.keyId,
+                                                                        base64Data: $0.base64Data
+                                                                    )
+                                                                 },
+                                                                 objects: sudo.objects.map {
+                                                                    ListSudosQuery.Data.ListSudo.Item.Object(
+                                                                        name: $0.name,
+                                                                        version: $0.version,
+                                                                        algorithm: $0.algorithm,
+                                                                        keyId: $0.keyId,
+                                                                        bucket: $0.bucket,
+                                                                        region: $0.region,
+                                                                        key: $0.key
+                                                                    )
+                                                                 },
+                                                                 metadata: sudo.metadata.map {
+                                                                    ListSudosQuery.Data.ListSudo.Item.Metadatum(
+                                                                        name: $0.name,
+                                                                        value: $0.value
+                                                                    )
+                                                                 },
+                                                                 createdAtEpochMs: sudo.createdAtEpochMs,
+                                                                 updatedAtEpochMs: sudo.updatedAtEpochMs,
+                                                                 version: sudo.version,
+                                                                 owner: sudo.owner)
+
+                    _ = self.graphQLClient.getAppSyncClient().store?.withinReadWriteTransaction { transaction in
+                        try transaction.update(query: self.query) { (data: inout ListSudosQuery.Data) in
+                            var listSudos = data.listSudos ?? ListSudosQuery.Data.ListSudo(items: [])
+                            var items = listSudos.items ?? []
+                            // There shouldn't be duplicate entries but just in case remove existing
+                            // entry if found.
+                            items = items.filter { $0.id != item.id }
+                            items.append(item)
+                            listSudos.items = items
+                            data.listSudos = listSudos
+                        }
+                    }
 
                     self.logger.info("Sudo created successfully.")
                     self.done()

@@ -18,6 +18,7 @@ end
 
 target "SudoProfilesIntegrationTests" do
   podspec :name => 'SudoProfiles'
+  pod 'SudoEntitlements'
 end
 
 post_install do |installer|

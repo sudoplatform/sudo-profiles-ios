@@ -177,6 +177,7 @@ public protocol SudoProfilesClient: AnyObject {
     ///   - token: Token.
     ///   - type: Token type. Currently only valid value is "entitlements" but this maybe extended in future.
     ///   - completion: The completion handler to invoke to pass the resulting entitlements or error.
+    @available(*, deprecated, message: "Use Sudo Entitlements SDK instead")
     func redeem(token: String, type: String, completion: @escaping (Swift.Result<[Entitlement], Error>) -> Void) throws
 
     /// Returns the count of outstanding create or update requests.
@@ -436,7 +437,15 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
 
         // First create the Sudo without any claims since we need the Sudo ID to create
         // the blob claims in S3.
-        let createSudoOp = CreateSudo(cryptoProvider: self.cryptoProvider, graphQLClient: self.graphQLClient, region: self.region, bucket: self.s3Bucket, identityId: identityId, sudo: Sudo())
+        let createSudoOp = CreateSudo(
+            cryptoProvider: self.cryptoProvider,
+            graphQLClient: self.graphQLClient,
+            region: self.region,
+            bucket: self.s3Bucket,
+            identityId: identityId,
+            query: self.defaultQuery,
+            sudo: Sudo()
+        )
         createSudoOp.completionBlock = {
             if let error = createSudoOp.error {
                 self.logger.error("Failed create Sudo: \(error)")
@@ -552,7 +561,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
             }
         }
 
-        let deleteSudoOp = DeleteSudo(graphQLClient: self.graphQLClient, sudo: sudo)
+        let deleteSudoOp = DeleteSudo(graphQLClient: self.graphQLClient, query: self.defaultQuery, sudo: sudo)
         deleteSudoOp.completionBlock = {
             let errors = operations.compactMap { $0.error }
             if let error = errors.first {
@@ -722,13 +731,15 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
 
                 do {
                     // Update the query cache.
-                    let query = ListSudosQuery()
-                    try transaction?.update(query: query) { (data: inout ListSudosQuery.Data) in
+                    try transaction?.update(query: self.defaultQuery) { (data: inout ListSudosQuery.Data) in
+                        var listSudos = data.listSudos ?? ListSudosQuery.Data.ListSudo(items: [])
+                        var items = listSudos.items ?? []
                         // There shouldn't be duplicate entries but just in case remove existing
                         // entry if found.
-                        let newState = data.listSudos?.items?.filter { $0.id != item.id }
-                        data.listSudos?.items = newState
-                        data.listSudos?.items?.append(item)
+                        items = items.filter { $0.id != item.id }
+                        items.append(item)
+                        listSudos.items = items
+                        data.listSudos = listSudos
                     }
                 } catch let error {
                     self.logger.error("Query cache updated failed: \(error)")
@@ -815,8 +826,7 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
 
                 do {
                     // Update the query cache.
-                    let query = ListSudosQuery()
-                    try transaction?.update(query: query) { (data: inout ListSudosQuery.Data) in
+                    try transaction?.update(query: self.defaultQuery) { (data: inout ListSudosQuery.Data) in
                         guard let items = data.listSudos?.items else {
                             return
                         }

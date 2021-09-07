@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                  = 'SudoProfiles'
-  spec.version               = '13.0.0'
+  spec.version               = '13.0.1'
   spec.author                = { 'Sudo Platform Engineering' => 'sudoplatform-engineering@anonyome.com' }
   spec.homepage              = 'https://sudoplatform.com'
   spec.summary               = 'Profiles SDK for the Sudo Platform by Anonyome Labs.'
