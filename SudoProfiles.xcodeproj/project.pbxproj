@@ -33,7 +33,6 @@
 		D95D214C2591636700863345 /* CryptoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D214B2591636700863345 /* CryptoProvider.swift */; };
 		D991835323CD6D1200848F0A /* OwnershipProofIssuer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D991835223CD6D1200848F0A /* OwnershipProofIssuer.swift */; };
 		D99495B523FA162B00D2683C /* Entitlement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99495B423FA162B00D2683C /* Entitlement.swift */; };
-		D99495B723FA192800D2683C /* RedeemToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99495B623FA192800D2683C /* RedeemToken.swift */; };
 		D9971C6222FD299A0077076C /* SudoProfiles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9971C5822FD299A0077076C /* SudoProfiles.framework */; };
 		D9971C6722FD299A0077076C /* SudoProfilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9971C6622FD299A0077076C /* SudoProfilesTests.swift */; };
 		D9971C6922FD299A0077076C /* SudoProfiles.h in Headers */ = {isa = PBXBuildFile; fileRef = D9971C5B22FD299A0077076C /* SudoProfiles.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -115,7 +114,6 @@
 		D95D214B2591636700863345 /* CryptoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoProvider.swift; sourceTree = "<group>"; };
 		D991835223CD6D1200848F0A /* OwnershipProofIssuer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnershipProofIssuer.swift; sourceTree = "<group>"; };
 		D99495B423FA162B00D2683C /* Entitlement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entitlement.swift; sourceTree = "<group>"; };
-		D99495B623FA192800D2683C /* RedeemToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemToken.swift; sourceTree = "<group>"; };
 		D9971C5822FD299A0077076C /* SudoProfiles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SudoProfiles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9971C5B22FD299A0077076C /* SudoProfiles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudoProfiles.h; sourceTree = "<group>"; };
 		D9971C5C22FD299A0077076C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -231,7 +229,6 @@
 				D9430F212344603800523B1D /* UpdateSudo.swift */,
 				D9430F232344604400523B1D /* DeleteSudo.swift */,
 				D94644602358198B00F4BCF8 /* DeleteS3Object.swift */,
-				D99495B623FA192800D2683C /* RedeemToken.swift */,
 			);
 			name = Operation;
 			sourceTree = "<group>";
@@ -670,7 +667,6 @@
 				D94644632358291200F4BCF8 /* BlobCache.swift in Sources */,
 				D931C7CB2342D3D000932612 /* Data.swift in Sources */,
 				D9971C7E22FD46650077076C /* Logger.swift in Sources */,
-				D99495B723FA192800D2683C /* RedeemToken.swift in Sources */,
 				D946445F23580EF100F4BCF8 /* Date.swift in Sources */,
 				D9F16E6622FD490C0055513F /* SudoServiceAPI.swift in Sources */,
 				D931C7D923432B5F00932612 /* SudoOperation.swift in Sources */,

@@ -248,32 +248,6 @@ public struct GetOwnershipProofInput: GraphQLMapConvertible {
   }
 }
 
-public struct RedeemTokenInput: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  public init(token: String, type: String) {
-    graphQLMap = ["token": token, "type": type]
-  }
-
-  public var token: String {
-    get {
-      return graphQLMap["token"] as! String
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "token")
-    }
-  }
-
-  public var type: String {
-    get {
-      return graphQLMap["type"] as! String
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "type")
-    }
-  }
-}
-
 public struct ProcessCreateSudoEventInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -2342,95 +2316,6 @@ public final class GetOwnershipProofMutation: GraphQLMutation {
         }
         set {
           snapshot.updateValue(newValue, forKey: "jwt")
-        }
-      }
-    }
-  }
-}
-
-public final class RedeemTokenMutation: GraphQLMutation {
-  public static let operationString =
-    "mutation RedeemToken($input: RedeemTokenInput!) {\n  redeemToken(input: $input) {\n    __typename\n    name\n    value\n  }\n}"
-
-  public var input: RedeemTokenInput
-
-  public init(input: RedeemTokenInput) {
-    self.input = input
-  }
-
-  public var variables: GraphQLMap? {
-    return ["input": input]
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Mutation"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("redeemToken", arguments: ["input": GraphQLVariable("input")], type: .nonNull(.list(.nonNull(.object(RedeemToken.selections))))),
-    ]
-
-    public var snapshot: Snapshot
-
-    public init(snapshot: Snapshot) {
-      self.snapshot = snapshot
-    }
-
-    public init(redeemToken: [RedeemToken]) {
-      self.init(snapshot: ["__typename": "Mutation", "redeemToken": redeemToken.map { $0.snapshot }])
-    }
-
-    public var redeemToken: [RedeemToken] {
-      get {
-        return (snapshot["redeemToken"] as! [Snapshot]).map { RedeemToken(snapshot: $0) }
-      }
-      set {
-        snapshot.updateValue(newValue.map { $0.snapshot }, forKey: "redeemToken")
-      }
-    }
-
-    public struct RedeemToken: GraphQLSelectionSet {
-      public static let possibleTypes = ["Entitlement"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("value", type: .nonNull(.scalar(Int.self))),
-      ]
-
-      public var snapshot: Snapshot
-
-      public init(snapshot: Snapshot) {
-        self.snapshot = snapshot
-      }
-
-      public init(name: String, value: Int) {
-        self.init(snapshot: ["__typename": "Entitlement", "name": name, "value": value])
-      }
-
-      public var __typename: String {
-        get {
-          return snapshot["__typename"]! as! String
-        }
-        set {
-          snapshot.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var name: String {
-        get {
-          return snapshot["name"]! as! String
-        }
-        set {
-          snapshot.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      public var value: Int {
-        get {
-          return snapshot["value"]! as! Int
-        }
-        set {
-          snapshot.updateValue(newValue, forKey: "value")
         }
       }
     }

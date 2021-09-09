@@ -171,15 +171,6 @@ public protocol SudoProfilesClient: AnyObject {
     /// - Throws: `SudoProfilesClientError`
     func listSudos(option: ListOption, completion: @escaping (Swift.Result<[Sudo], Error>) -> Void) throws
 
-    /// Redeem a token to be granted additional entitlements.
-    ///
-    /// - Parameters:
-    ///   - token: Token.
-    ///   - type: Token type. Currently only valid value is "entitlements" but this maybe extended in future.
-    ///   - completion: The completion handler to invoke to pass the resulting entitlements or error.
-    @available(*, deprecated, message: "Use Sudo Entitlements SDK instead")
-    func redeem(token: String, type: String, completion: @escaping (Swift.Result<[Entitlement], Error>) -> Void) throws
-
     /// Returns the count of outstanding create or update requests.
     ///
     /// - Returns: Outstanding requests count.
@@ -619,22 +610,6 @@ public class DefaultSudoProfilesClient: SudoProfilesClient {
         } catch {
             throw SudoProfilesClientError.fromApiOperationError(error: error)
         }
-    }
-
-    public func redeem(token: String, type: String, completion: @escaping (Swift.Result<[Entitlement], Error>) -> Void) throws {
-        self.logger.info("Redeeming a token for entitlements.")
-
-        let redeemOp = RedeemToken(graphQLClient: self.graphQLClient, token: token, type: type)
-        redeemOp.completionBlock = {
-           if let error = redeemOp.error {
-                self.logger.error("Failed redeem a token for entitlements: \(error)")
-            completion(.failure(error))
-            } else {
-                self.logger.info("Token redeemed succcessfully.")
-                completion(.success(redeemOp.entitlements))
-            }
-        }
-        self.sudoOperationQueue.addOperations([redeemOp], waitUntilFinished: false)
     }
 
     public func getOutstandingRequestsCount() -> Int {

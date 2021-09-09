@@ -226,14 +226,14 @@
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 261,
+      "line": 252,
       "symbol": "DefaultSudoProfilesClient.CacheType",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoProfilesClient.swift",
-      "line": 266,
+      "line": 257,
       "symbol": "DefaultSudoProfilesClient.Config",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
@@ -290,111 +290,97 @@
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
       "line": 251,
-      "symbol": "RedeemTokenInput",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 277,
       "symbol": "ProcessCreateSudoEventInput",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 321,
+      "line": 295,
       "symbol": "AttributeInput",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 347,
+      "line": 321,
       "symbol": "ProcessDeleteSudoEventInput",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 373,
+      "line": 347,
       "symbol": "GetSudoQuery",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 743,
+      "line": 717,
       "symbol": "ListSudosQuery",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 1162,
+      "line": 1136,
       "symbol": "CreateSudoMutation",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 1532,
+      "line": 1506,
       "symbol": "UpdateSudoMutation",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 1902,
+      "line": 1876,
       "symbol": "DeleteSudoMutation",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 2272,
+      "line": 2246,
       "symbol": "GetOwnershipProofMutation",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 2351,
-      "symbol": "RedeemTokenMutation",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 2440,
+      "line": 2325,
       "symbol": "InternalProcessCreateSudoEventMutation",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 2810,
+      "line": 2695,
       "symbol": "InternalProcessDeleteSudoEventMutation",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 3180,
+      "line": 3065,
       "symbol": "OnCreateSudoSubscription",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 3550,
+      "line": 3435,
       "symbol": "OnUpdateSudoSubscription",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/identity/sudo-profiles-ios/sudo-profiles-ios-gh/SudoProfiles/SudoServiceAPI.swift",
-      "line": 3920,
+      "line": 3805,
       "symbol": "OnDeleteSudoSubscription",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
