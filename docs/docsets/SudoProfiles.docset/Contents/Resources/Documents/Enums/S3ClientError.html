@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>EncryptionKey Structure Reference</title>
+    <title>S3ClientError Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Struct/EncryptionKey" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Enum/S3ClientError" class="dashAnchor"></a>
 
-    <a title="EncryptionKey Structure Reference"></a>
+    <a title="S3ClientError Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">SudoProfiles Reference</a>
       <img class="carat" src="../img/carat.png" alt=""/>
-      EncryptionKey Structure Reference
+      S3ClientError Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -130,15 +130,15 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>EncryptionKey</h1>
+            <h1>S3ClientError</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EncryptionKey</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">S3ClientError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                 </div>
               </div>
-            <p>Exported encryption key.</p>
+            <p>List of possible errors thrown by <code><a href="../Protocols/S3Client.html">S3Client</a></code> implementation.</p>
 
           </div>
         </section>
@@ -150,9 +150,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles13EncryptionKeyV2idSSvp"></a>
-                    <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles13EncryptionKeyV2idSSvp">id</a>
+                    <a name="/s:12SudoProfiles13S3ClientErrorO05fatalE0yACSS_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/fatalError(description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles13S3ClientErrorO05fatalE0yACSS_tcACmF">fatalError(description:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -160,14 +160,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Key ID.</p>
+                        <p>Indicates that a fatal error occurred. This could be due to coding error, out-of-memory
+condition or other conditions that is beyond control of <code><a href="../Protocols/S3Client.html">S3Client</a></code> implementation.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">fatalError</span><span class="p">(</span><span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -177,9 +178,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles13EncryptionKeyV9namespaceSSvp"></a>
-                    <a name="//apple_ref/swift/Property/namespace" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles13EncryptionKeyV9namespaceSSvp">namespace</a>
+                    <a name="/s:12SudoProfiles13S3ClientErrorO07serviceE0yACs0E0_p_tcACmF"></a>
+                    <a name="//apple_ref/swift/Element/serviceError(cause:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles13S3ClientErrorO07serviceE0yACs0E0_p_tcACmF">serviceError(cause:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -187,95 +188,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Key namespace.</p>
+                        <p>Backed service is temporarily unavailable due to network or service availability issues.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">namespace</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles13EncryptionKeyV3keySSvp"></a>
-                    <a name="//apple_ref/swift/Property/key" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles13EncryptionKeyV3keySSvp">key</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Base64 encoded key.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles13EncryptionKeyV9algorithmSSvp"></a>
-                    <a name="//apple_ref/swift/Property/algorithm" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles13EncryptionKeyV9algorithmSSvp">algorithm</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Cryptographic algorithm associated with the key.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">algorithm</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles13EncryptionKeyV7versionSivp"></a>
-                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles13EncryptionKeyV7versionSivp">version</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Key version.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">serviceError</span><span class="p">(</span><span class="nv">cause</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>

@@ -59,6 +59,13 @@
             ReferencedContainer = "container:SudoProfiles.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "CONFIG_NAME"
+            value = "${CONFIG_NAME}"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

@@ -21,23 +21,23 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          SudoProfiles 14.0.2 Docs
+          SudoProfiles 15.0.0 Docs
         </a>
         
       </p>
     
-      <p class="header-col--secondary">
+      <div class="header-col--secondary">
         <form role="search" action="../search.json">
           <input type="text" placeholder="Search documentation" data-typeahead>
         </form>
-      </p>
+      </div>
     
     
     </header>
 
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">SudoProfiles Reference</a>
-      <img class="carat" src="../img/carat.png" />
+      <img class="carat" src="../img/carat.png" alt=""/>
       SudoProfilesClient Protocol Reference
     </p>
 
@@ -56,40 +56,22 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/DefaultSudoProfilesClient.html">DefaultSudoProfilesClient</a>
               </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/SudoOperation.html">SudoOperation</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles23GetOwnershipProofResultO">GetOwnershipProofResult</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles10ListOptionO">ListOption</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles11S3ApiResultO">S3ApiResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles13S3ClientErrorO">S3ClientError</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles16S3DownloadResultO">S3DownloadResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles14S3UploadResultO">S3UploadResult</a>
+                <a class="nav-group-task-link" href="../Enums/S3ClientError.html">S3ClientError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles27SubscriptionConnectionStateO">SubscriptionConnectionState</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles0A10ChangeTypeO">SudoChangeType</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles0A14OperationErrorO">SudoOperationError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/SudoProfilesClientError.html">SudoProfilesClientError</a>
@@ -151,6 +133,7 @@
             <h1>SudoProfilesClient</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">SudoProfilesClient</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
 
                 </div>
@@ -167,10 +150,13 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0aB6ClientP06createA04sudo10completionyAA0A0V_ys6ResultOyAHs5Error_pGctKF"></a>
-                    <a name="//apple_ref/swift/Method/createSudo(sudo:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP06createA04sudo10completionyAA0A0V_ys6ResultOyAHs5Error_pGctKF">createSudo(sudo:<wbr>completion:<wbr>)</a>
+                    <a name="/s:12SudoProfiles0aB6ClientP06createA04sudoAA0A0VAG_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/createSudo(sudo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP06createA04sudoAA0A0VAG_tYaKF">createSudo(sudo:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -189,7 +175,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createSudo</span><span class="p">(</span><span class="nv">sudo</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createSudo</span><span class="p">(</span><span class="nv">sudo</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span></code></pre>
 
                         </div>
                       </div>
@@ -209,20 +195,12 @@
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The completion handler to invoke to pass the creation result.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the created Sudo.</p>
                       </div>
                     </section>
                   </div>
@@ -230,10 +208,13 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0aB6ClientP06updateA04sudo10completionyAA0A0V_ys6ResultOyAHs5Error_pGctKF"></a>
-                    <a name="//apple_ref/swift/Method/updateSudo(sudo:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP06updateA04sudo10completionyAA0A0V_ys6ResultOyAHs5Error_pGctKF">updateSudo(sudo:<wbr>completion:<wbr>)</a>
+                    <a name="/s:12SudoProfiles0aB6ClientP06updateA04sudoAA0A0VAG_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/updateSudo(sudo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP06updateA04sudoAA0A0VAG_tYaKF">updateSudo(sudo:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -252,7 +233,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">updateSudo</span><span class="p">(</span><span class="nv">sudo</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">updateSudo</span><span class="p">(</span><span class="nv">sudo</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span></code></pre>
 
                         </div>
                       </div>
@@ -272,20 +253,12 @@
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The completion handler to invoke to pass the update result.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the updated Sudo.</p>
                       </div>
                     </section>
                   </div>
@@ -293,10 +266,13 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0aB6ClientP06deleteA04sudo10completionyAA0A0V_ys6ResultOyyts5Error_pGctKF"></a>
-                    <a name="//apple_ref/swift/Method/deleteSudo(sudo:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP06deleteA04sudo10completionyAA0A0V_ys6ResultOyyts5Error_pGctKF">deleteSudo(sudo:<wbr>completion:<wbr>)</a>
+                    <a name="/s:12SudoProfiles0aB6ClientP06deleteA04sudoyAA0A0V_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/deleteSudo(sudo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP06deleteA04sudoyAA0A0V_tYaKF">deleteSudo(sudo:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -315,40 +291,9 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteSudo</span><span class="p">(</span><span class="nv">sudo</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteSudo</span><span class="p">(</span><span class="nv">sudo</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sudo</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Sudo to delete.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The completion handler to invoke to pass the deletion result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -356,10 +301,13 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0aB6ClientP9listSudos6option10completionyAA10ListOptionO_ys6ResultOySayAA0A0VGs5Error_pGctKF"></a>
-                    <a name="//apple_ref/swift/Method/listSudos(option:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP9listSudos6option10completionyAA10ListOptionO_ys6ResultOySayAA0A0VGs5Error_pGctKF">listSudos(option:<wbr>completion:<wbr>)</a>
+                    <a name="/s:12SudoProfiles0aB6ClientP9listSudos6optionSayAA0A0VGAA10ListOptionO_tYaKF"></a>
+                    <a name="//apple_ref/swift/Method/listSudos(option:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP9listSudos6optionSayAA0A0VGAA10ListOptionO_tYaKF">listSudos(option:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -378,7 +326,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listSudos</span><span class="p">(</span><span class="nv">option</span><span class="p">:</span> <span class="kt"><a href="../Enums.html#/s:12SudoProfiles10ListOptionO">ListOption</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">],</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listSudos</span><span class="p">(</span><span class="nv">option</span><span class="p">:</span> <span class="kt"><a href="../Enums.html#/s:12SudoProfiles10ListOptionO">ListOption</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -398,20 +346,12 @@
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The completion handler to invoke to pass the list result.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>an array of all the Sudos owned by signed in user.</p>
                       </div>
                     </section>
                   </div>
@@ -482,10 +422,13 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0aB6ClientP9subscribe2id10changeType10subscriberySS_AA0a6ChangeG0OAA0A10Subscriber_ptKF"></a>
+                    <a name="/s:12SudoProfiles0aB6ClientP9subscribe2id10changeType10subscriberySS_AA0a6ChangeG0OAA0A10Subscriber_ptYaKF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(id:changeType:subscriber:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP9subscribe2id10changeType10subscriberySS_AA0a6ChangeG0OAA0A10Subscriber_ptKF">subscribe(id:<wbr>changeType:<wbr>subscriber:<wbr>)</a>
+                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP9subscribe2id10changeType10subscriberySS_AA0a6ChangeG0OAA0A10Subscriber_ptYaKF">subscribe(id:<wbr>changeType:<wbr>subscriber:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -500,7 +443,7 @@ so the caller is expected to use <code>listSudos</code> API if they need to acce
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">subscribe</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">changeType</span><span class="p">:</span> <span class="kt"><a href="../Enums.html#/s:12SudoProfiles0A10ChangeTypeO">SudoChangeType</a></span><span class="p">,</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/SudoSubscriber.html">SudoSubscriber</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">subscribe</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">changeType</span><span class="p">:</span> <span class="kt"><a href="../Enums.html#/s:12SudoProfiles0A10ChangeTypeO">SudoChangeType</a></span><span class="p">,</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/SudoSubscriber.html">SudoSubscriber</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -553,10 +496,13 @@ so the caller is expected to use <code>listSudos</code> API if they need to acce
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0aB6ClientP9subscribe2id10subscriberySS_AA0A10Subscriber_ptKF"></a>
+                    <a name="/s:12SudoProfiles0aB6ClientP9subscribe2id10subscriberySS_AA0A10Subscriber_ptYaKF"></a>
                     <a name="//apple_ref/swift/Method/subscribe(id:subscriber:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP9subscribe2id10subscriberySS_AA0A10Subscriber_ptKF">subscribe(id:<wbr>subscriber:<wbr>)</a>
+                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP9subscribe2id10subscriberySS_AA0A10Subscriber_ptYaKF">subscribe(id:<wbr>subscriber:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -571,7 +517,7 @@ so the caller is expected to use <code>listSudos</code> API if they need to acce
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">subscribe</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/SudoSubscriber.html">SudoSubscriber</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">subscribe</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">subscriber</span><span class="p">:</span> <span class="kt"><a href="../Protocols/SudoSubscriber.html">SudoSubscriber</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -744,10 +690,13 @@ so the caller is expected to use <code>listSudos</code> API if they need to acce
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles0aB6ClientP17getOwnershipProof4sudo8audience10completionyAA0A0V_SSyAA03GeteF6ResultOctKF"></a>
-                    <a name="//apple_ref/swift/Method/getOwnershipProof(sudo:audience:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP17getOwnershipProof4sudo8audience10completionyAA0A0V_SSyAA03GeteF6ResultOctKF">getOwnershipProof(sudo:<wbr>audience:<wbr>completion:<wbr>)</a>
+                    <a name="/s:12SudoProfiles0aB6ClientP17getOwnershipProof4sudo8audienceSSAA0A0V_SStYaKF"></a>
+                    <a name="//apple_ref/swift/Method/getOwnershipProof(sudo:audience:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles0aB6ClientP17getOwnershipProof4sudo8audienceSSAA0A0V_SStYaKF">getOwnershipProof(sudo:<wbr>audience:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -761,7 +710,7 @@ so the caller is expected to use <code>listSudos</code> API if they need to acce
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getOwnershipProof</span><span class="p">(</span><span class="nv">sudo</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">,</span> <span class="nv">audience</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums.html#/s:12SudoProfiles23GetOwnershipProofResultO">GetOwnershipProofResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getOwnershipProof</span><span class="p">(</span><span class="nv">sudo</span><span class="p">:</span> <span class="kt"><a href="../Structs/Sudo.html">Sudo</a></span><span class="p">,</span> <span class="nv">audience</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -795,6 +744,10 @@ so the caller is expected to use <code>listSudos</code> API if they need to acce
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON Web Token representing Sudo ownership proof.</p>
                       </div>
                     </section>
                   </div>
@@ -962,9 +915,8 @@ before the new keys are imported.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2022-01-17)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2022 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external noopener">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2022-02-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
-</div>
 </html>

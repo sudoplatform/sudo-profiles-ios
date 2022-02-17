@@ -11,16 +11,6 @@ import AWSAppSync
 import SudoLogging
 import SudoApiClient
 
-/// Result returned by APIs for retrieve Sudo owernship proof. The API can fail
-/// with an error or return a signed proof in form of JWT.
-///
-/// - success: Ownership proof was retrieved successfully.
-/// - failure: Ownership proof retrieval failed with an error.
-public enum GetOwnershipProofResult {
-    case success(jwt: String)
-    case failure(cause: Error)
-}
-
 // Protocol encapsulating APIs for issuing ownership proofs.
 // These APIs are used by other Sudo platform clients and any
 // app developed using this SDK is not expected to use these
@@ -49,8 +39,8 @@ public protocol OwnershipProofIssuer: AnyObject {
     ///   - ownerId: Owner ID.
     ///   - subject: Subject to which the proof is issued to.
     ///   - audience: Target audience for this proof.
-    ///   - completion: Completion handler to pass back the proof or any error.
-    func getOwnershipProof(ownerId: String, subject: String, audience: String, completion: @escaping (GetOwnershipProofResult) -> Void) throws
+    /// - Returns: JSON Web Token representing Sudo ownership proof
+    func getOwnershipProof(ownerId: String, subject: String, audience: String) async throws -> String
 
 }
 
@@ -80,35 +70,32 @@ class DefaultOwnershipProofIssuer: OwnershipProofIssuer {
         self.logger = logger
     }
 
-    func getOwnershipProof(ownerId: String, subject: String, audience: String, completion: @escaping (GetOwnershipProofResult) -> Void) throws {
+    func getOwnershipProof(ownerId: String, subject: String, audience: String) async throws -> String {
+        var result: GraphQLResult<GetOwnershipProofMutation.Data>?
+        var error: Error?
         do {
-            try self.graphQLClient.perform(
-                mutation: GetOwnershipProofMutation(input: GetOwnershipProofInput(sudoId: ownerId, audience: audience)),
-                queue: self.queue,
-                resultHandler: { (result, error) in
-                    if let error = error {
-                        self.logger.error("Failed to retrieve ownership proof: \(error)")
-                        return completion(.failure(cause: SudoProfilesClientError.fromApiOperationError(error: error)))
-                    }
-
-                    guard let result = result else {
-                        return completion(.failure(cause: SudoProfilesClientError.fatalError(description: "Mutation completed successfully but result is missing.")))
-                    }
-
-                    if let error = result.errors?.first {
-                        self.logger.error("Failed to retrieve ownership proof: \(error)")
-                        return completion(.failure(cause: SudoProfilesClientError.fromApiOperationError(error: error)))
-                    }
-
-                    guard let jwt = result.data?.getOwnershipProof?.jwt else {
-                        return completion(.failure(cause: SudoProfilesClientError.fatalError(description: "Mutation result did not contain required object.")))
-                    }
-
-                    completion(.success(jwt: jwt))
-                })
+            (result, error) = try await self.graphQLClient.perform(mutation: GetOwnershipProofMutation(input: GetOwnershipProofInput(sudoId: ownerId, audience: audience)), queue: self.queue)
         } catch {
             throw SudoProfilesClientError.fromApiOperationError(error: error)
         }
+        if let error = error {
+            self.logger.error("Failed to retrieve ownership proof: \(error)")
+            throw SudoProfilesClientError.fromApiOperationError(error: error)
+        }
+
+        guard let result = result else {
+            throw SudoProfilesClientError.fatalError(description: "Mutation completed successfully but result is missing.")
+        }
+
+        if let error = result.errors?.first {
+            self.logger.error("Failed to retrieve ownership proof: \(error)")
+            throw SudoProfilesClientError.fromApiOperationError(error: error)
+        }
+
+        guard let jwt = result.data?.getOwnershipProof?.jwt else {
+            throw SudoProfilesClientError.fatalError(description: "Mutation result did not contain required object.")
+        }
+        return jwt
     }
 
 }
@@ -148,11 +135,11 @@ public class ClientOwnershipProofIssuer: OwnershipProofIssuer {
         try self.keyManager.addPrivateKey(keyData, name: keyId)
     }
 
-    public func getOwnershipProof(ownerId: String, subject: String, audience: String, completion: @escaping (GetOwnershipProofResult) -> Void) throws {
+    public func getOwnershipProof(ownerId: String, subject: String, audience: String) async throws -> String {
         let jwt = JWT(issuer: self.issuer, audience: audience, subject: subject, id: UUID().uuidString)
         jwt.payload["owner"] = ownerId
         let encoded = try jwt.signAndEncode(keyManager: self.keyManager, keyId: self.keyId)
-        completion(GetOwnershipProofResult.success(jwt: encoded))
+        return encoded
     }
 
 }

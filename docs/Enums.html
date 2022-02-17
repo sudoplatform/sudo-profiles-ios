@@ -21,23 +21,23 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
-          SudoProfiles 14.0.2 Docs
+          SudoProfiles 15.0.0 Docs
         </a>
         
       </p>
     
-      <p class="header-col--secondary">
+      <div class="header-col--secondary">
         <form role="search" action="search.json">
           <input type="text" placeholder="Search documentation" data-typeahead>
         </form>
-      </p>
+      </div>
     
     
     </header>
 
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">SudoProfiles Reference</a>
-      <img class="carat" src="img/carat.png" />
+      <img class="carat" src="img/carat.png" alt=""/>
       Enumerations  Reference
     </p>
 
@@ -56,40 +56,22 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/DefaultSudoProfilesClient.html">DefaultSudoProfilesClient</a>
               </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/SudoOperation.html">SudoOperation</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles23GetOwnershipProofResultO">GetOwnershipProofResult</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles10ListOptionO">ListOption</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles11S3ApiResultO">S3ApiResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles13S3ClientErrorO">S3ClientError</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles16S3DownloadResultO">S3DownloadResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles14S3UploadResultO">S3UploadResult</a>
+                <a class="nav-group-task-link" href="Enums/S3ClientError.html">S3ClientError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles27SubscriptionConnectionStateO">SubscriptionConnectionState</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles0A10ChangeTypeO">SudoChangeType</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:12SudoProfiles0A14OperationErrorO">SudoOperationError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/SudoProfilesClientError.html">SudoProfilesClientError</a>
@@ -188,39 +170,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles23GetOwnershipProofResultO"></a>
-                    <a name="//apple_ref/swift/Enum/GetOwnershipProofResult" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles23GetOwnershipProofResultO">GetOwnershipProofResult</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Result returned by APIs for retrieve Sudo owernship proof. The API can fail
-with an error or return a signed proof in form of JWT.</p>
-
-<ul>
-<li>success: Ownership proof was retrieved successfully.</li>
-<li>failure: Ownership proof retrieval failed with an error.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">GetOwnershipProofResult</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:12SudoProfiles13S3ClientErrorO"></a>
                     <a name="//apple_ref/swift/Enum/S3ClientError" class="dashAnchor"></a>
                     <a class="token" href="#/s:12SudoProfiles13S3ClientErrorO">S3ClientError</a>
@@ -233,144 +182,13 @@ with an error or return a signed proof in form of JWT.</p>
                       <div class="abstract">
                         <p>List of possible errors thrown by <code><a href="Protocols/S3Client.html">S3Client</a></code> implementation.</p>
 
-<ul>
-<li>fatalError: Indicates that a fatal error occurred. This could be due to coding error, out-of-memory
-condition or other conditions that is beyond control of <code><a href="Protocols/S3Client.html">S3Client</a></code> implementation.</li>
-</ul>
-
+                        <a href="Enums/S3ClientError.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">S3ClientError</span> <span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles16S3DownloadResultO"></a>
-                    <a name="//apple_ref/swift/Enum/S3DownloadResult" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles16S3DownloadResultO">S3DownloadResult</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Result of downloading a blob from AWS S3.</p>
-
-<ul>
-<li>success: Download completed successfully.</li>
-<li>failure: Download failed with an error.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">S3DownloadResult</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles14S3UploadResultO"></a>
-                    <a name="//apple_ref/swift/Enum/S3UploadResult" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles14S3UploadResultO">S3UploadResult</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Result of uploading a blob to AWS S3.</p>
-
-<ul>
-<li>success: Upload completed successfully.</li>
-<li>failure: Upload failed with an error.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">S3UploadResult</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles11S3ApiResultO"></a>
-                    <a name="//apple_ref/swift/Enum/S3ApiResult" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles11S3ApiResultO">S3ApiResult</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Result of calling an AWS S3 administration API.</p>
-
-<ul>
-<li>success: API call completed successfully.</li>
-<li>failure: API call failed with an error.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">S3ApiResult</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12SudoProfiles0A14OperationErrorO"></a>
-                    <a name="//apple_ref/swift/Enum/SudoOperationError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles0A14OperationErrorO">SudoOperationError</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List of possible errors returned by <code><a href="Classes/SudoOperation.html">SudoOperation</a></code> and its subclasses.</p>
-
-<ul>
-<li>preconditionFailure: One of preconditions of the operation was not met.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SudoOperationError</span> <span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">S3ClientError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                         </div>
                       </div>
@@ -524,9 +342,8 @@ unsubscribed so the consumer must re-subscribe.</li>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2022-01-17)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2022 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external noopener">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2022-02-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
-</div>
 </html>

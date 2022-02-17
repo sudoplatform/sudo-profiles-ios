@@ -21,23 +21,23 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          SudoProfiles 14.0.2 Docs
+          SudoProfiles 15.0.0 Docs
         </a>
         
       </p>
     
-      <p class="header-col--secondary">
+      <div class="header-col--secondary">
         <form role="search" action="../search.json">
           <input type="text" placeholder="Search documentation" data-typeahead>
         </form>
-      </p>
+      </div>
     
     
     </header>
 
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">SudoProfiles Reference</a>
-      <img class="carat" src="../img/carat.png" />
+      <img class="carat" src="../img/carat.png" alt=""/>
       S3Client Protocol Reference
     </p>
 
@@ -56,40 +56,22 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/DefaultSudoProfilesClient.html">DefaultSudoProfilesClient</a>
               </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/SudoOperation.html">SudoOperation</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles23GetOwnershipProofResultO">GetOwnershipProofResult</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles10ListOptionO">ListOption</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles11S3ApiResultO">S3ApiResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles13S3ClientErrorO">S3ClientError</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles16S3DownloadResultO">S3DownloadResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles14S3UploadResultO">S3UploadResult</a>
+                <a class="nav-group-task-link" href="../Enums/S3ClientError.html">S3ClientError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles27SubscriptionConnectionStateO">SubscriptionConnectionState</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles0A10ChangeTypeO">SudoChangeType</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:12SudoProfiles0A14OperationErrorO">SudoOperationError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/SudoProfilesClientError.html">SudoProfilesClientError</a>
@@ -151,6 +133,7 @@
             <h1>S3Client</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">S3Client</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
 
                 </div>
@@ -168,10 +151,13 @@ AWS S3 SDK.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles8S3ClientP6upload4data11contentType6bucket3key10completiony10Foundation4DataV_S3SyAA0C12UploadResultOctKF"></a>
-                    <a name="//apple_ref/swift/Method/upload(data:contentType:bucket:key:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles8S3ClientP6upload4data11contentType6bucket3key10completiony10Foundation4DataV_S3SyAA0C12UploadResultOctKF">upload(data:<wbr>contentType:<wbr>bucket:<wbr>key:<wbr>completion:<wbr>)</a>
+                    <a name="/s:12SudoProfiles8S3ClientP6upload4data11contentType6bucket3keyy10Foundation4DataV_S3StYaKF"></a>
+                    <a name="//apple_ref/swift/Method/upload(data:contentType:bucket:key:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles8S3ClientP6upload4data11contentType6bucket3keyy10Foundation4DataV_S3StYaKF">upload(data:<wbr>contentType:<wbr>bucket:<wbr>key:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -181,7 +167,7 @@ AWS S3 SDK.</p>
                         <p>Uploads a blob to AWS S3.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums.html#/s:12SudoProfiles13S3ClientErrorO">S3ClientError</a></code>
+    <code><a href="../Enums/S3ClientError.html">S3ClientError</a></code>
 
 </div>
 
@@ -190,7 +176,7 @@ AWS S3 SDK.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">upload</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">bucket</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums.html#/s:12SudoProfiles14S3UploadResultO">S3UploadResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">upload</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">bucket</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -246,18 +232,6 @@ AWS S3 SDK.</p>
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Completion handler to invoke to pass upload result.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -267,10 +241,13 @@ AWS S3 SDK.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles8S3ClientP8download6bucket3key10completionySS_SSyAA0C14DownloadResultOctKF"></a>
-                    <a name="//apple_ref/swift/Method/download(bucket:key:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles8S3ClientP8download6bucket3key10completionySS_SSyAA0C14DownloadResultOctKF">download(bucket:<wbr>key:<wbr>completion:<wbr>)</a>
+                    <a name="/s:12SudoProfiles8S3ClientP8download6bucket3key10Foundation4DataVSS_SStYaKF"></a>
+                    <a name="//apple_ref/swift/Method/download(bucket:key:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles8S3ClientP8download6bucket3key10Foundation4DataVSS_SStYaKF">download(bucket:<wbr>key:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -280,7 +257,7 @@ AWS S3 SDK.</p>
                         <p>Downloads a blob from AWS S3.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums.html#/s:12SudoProfiles13S3ClientErrorO">S3ClientError</a></code>
+    <code><a href="../Enums/S3ClientError.html">S3ClientError</a></code>
 
 </div>
 
@@ -289,7 +266,7 @@ AWS S3 SDK.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">download</span><span class="p">(</span><span class="nv">bucket</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums.html#/s:12SudoProfiles16S3DownloadResultO">S3DownloadResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">download</span><span class="p">(</span><span class="nv">bucket</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
 
                         </div>
                       </div>
@@ -321,20 +298,12 @@ AWS S3 SDK.</p>
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Completion handler to invoke to pass download result.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The data in the bucket</p>
                       </div>
                     </section>
                   </div>
@@ -342,10 +311,13 @@ AWS S3 SDK.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12SudoProfiles8S3ClientP6delete6bucket3key10completionySS_SSyAA0C9ApiResultOctKF"></a>
-                    <a name="//apple_ref/swift/Method/delete(bucket:key:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12SudoProfiles8S3ClientP6delete6bucket3key10completionySS_SSyAA0C9ApiResultOctKF">delete(bucket:<wbr>key:<wbr>completion:<wbr>)</a>
+                    <a name="/s:12SudoProfiles8S3ClientP6delete6bucket3keyySS_SStYaKF"></a>
+                    <a name="//apple_ref/swift/Method/delete(bucket:key:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12SudoProfiles8S3ClientP6delete6bucket3keyySS_SStYaKF">delete(bucket:<wbr>key:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -355,7 +327,7 @@ AWS S3 SDK.</p>
                         <p>Deletes a blob stored AWS S3.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code><a href="../Enums.html#/s:12SudoProfiles13S3ClientErrorO">S3ClientError</a></code>
+    <code><a href="../Enums/S3ClientError.html">S3ClientError</a></code>
 
 </div>
 
@@ -364,7 +336,7 @@ AWS S3 SDK.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">bucket</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums.html#/s:12SudoProfiles11S3ApiResultO">S3ApiResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">bucket</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -393,18 +365,6 @@ AWS S3 SDK.</p>
                               <td>
                                 <div>
                                   <p>S3 key associated with the blob.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Completion handler to invoke to pass deletion result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -422,9 +382,8 @@ AWS S3 SDK.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2022-01-17)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2022 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external noopener">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2022-02-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
-</div>
 </html>
