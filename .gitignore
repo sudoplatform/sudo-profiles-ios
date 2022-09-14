@@ -16,4 +16,5 @@ DerivedData
 *.xcuserstate
 Carthage/Build/
 identity-system-test-config
+config
 build/
