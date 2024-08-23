@@ -18,3 +18,6 @@ Carthage/Build/
 identity-system-test-config
 config
 build/
+
+# We generate .jazzy.yaml from .jazzy.yaml.tempalte
+.jazzy.yaml
