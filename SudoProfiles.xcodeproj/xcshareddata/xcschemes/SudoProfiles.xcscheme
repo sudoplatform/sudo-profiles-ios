@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D9971C5722FD299A0077076C"
-               BuildableName = "SudoProfiles.framework"
+               BlueprintIdentifier = "SudoProfiles"
+               BuildableName = "SudoProfiles"
                BlueprintName = "SudoProfiles"
-               ReferencedContainer = "container:SudoProfiles.xcodeproj">
+               ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -70,15 +70,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D9971C5722FD299A0077076C"
-            BuildableName = "SudoProfiles.framework"
-            BlueprintName = "SudoProfiles"
-            ReferencedContainer = "container:SudoProfiles.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -89,10 +80,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D9971C5722FD299A0077076C"
-            BuildableName = "SudoProfiles.framework"
+            BlueprintIdentifier = "SudoProfiles"
+            BuildableName = "SudoProfiles"
             BlueprintName = "SudoProfiles"
-            ReferencedContainer = "container:SudoProfiles.xcodeproj">
+            ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

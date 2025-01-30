@@ -1,0 +1,6 @@
+#!/bin/bash
+sed -i '' -E -e 's/((AWS_[A-Z_]+|DEFAULT_ENTITLEMENTS_SET_FOR_TEST_USERS|INTEGRATION_TEST_ENTITLEMENTS_SET_AVAILABLE)[[:space:]]*=[[:space:]]*).*$/\1"";/' SudoEntitlements.xcodeproj/project.pbxproj
+if [[ `git status --porcelain` ]]; then
+    echo "AWS creds and integration test settings removed. Please run util/check_creds_removed locally and commit again"
+    exit 1
+fi
