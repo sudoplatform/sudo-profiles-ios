@@ -24,3 +24,5 @@ Build/
 # We generate .jazzy.yaml from .jazzy.yaml.tempalte
 .jazzy.yaml
 .build
+
+/Package.resolved

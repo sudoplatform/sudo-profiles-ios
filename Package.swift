@@ -9,29 +9,30 @@ let package = Package(
     products: [
         .library(
             name: "SudoProfiles",
-            targets: ["SudoProfiles"]),
+            targets: ["SudoProfiles"]
+        ),
     ],
     dependencies: [
-        .package(url: "https://github.com/sudoplatform/sudo-api-client-ios", from: "12.0.0"),
-        .package(url: "https://github.com/sudoplatform/sudo-config-manager-ios", from: "4.0.0"),
+        .package(url: "https://github.com/sudoplatform/sudo-api-client-ios", from: "13.0.0"),
+        .package(url: "https://github.com/sudoplatform/sudo-config-manager-ios", from: "5.0.0"),
+        .package(url: "https://github.com/sudoplatform/sudo-key-manager-ios", from: "4.0.0"),
         .package(url: "https://github.com/sudoplatform/sudo-logging-ios", from: "2.0.0"),
-        .package(url: "https://github.com/sudoplatform/sudo-user-ios", from: "17.0.3"),
-        .package(url: "https://github.com/aws-amplify/aws-sdk-ios-spm", exact: "2.36.7"),
-        .package(url: "https://github.com/sudoplatform/aws-mobile-appsync-sdk-ios.git", exact: "3.7.2"),
+        .package(url: "https://github.com/sudoplatform/sudo-user-ios", from: "18.0.0"),
+        .package(url: "https://github.com/aws-amplify/amplify-swift", from: "2.45.4"),
     ],
     targets: [
         .target(
             name: "SudoProfiles",
             dependencies: [
-                .product(name: "AWSAppSync", package: "aws-mobile-appsync-sdk-ios"),
-                .product(name: "AWSCore", package: "aws-sdk-ios-spm"),
-                .product(name: "AWSS3", package: "aws-sdk-ios-spm"),
-                .product(name: "SudoLogging", package: "sudo-logging-ios"),
-                .product(name: "SudoConfigManager", package: "sudo-config-manager-ios"),
+                .product(name: "Amplify", package: "amplify-swift"),
+                .product(name: "AWSS3StoragePlugin", package: "amplify-swift"),
                 .product(name: "SudoApiClient", package: "sudo-api-client-ios"),
-                .product(name: "SudoUser", package: "sudo-user-ios")
+                .product(name: "SudoConfigManager", package: "sudo-config-manager-ios"),
+                .product(name: "SudoKeyManager", package: "sudo-key-manager-ios"),
+                .product(name: "SudoLogging", package: "sudo-logging-ios"),
+                .product(name: "SudoUser", package: "sudo-user-ios"),
             ],
-            path: "SudoProfiles/"),
+            path: "SudoProfiles/"
+        ),
     ]
 )
-

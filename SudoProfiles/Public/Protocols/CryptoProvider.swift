@@ -8,7 +8,7 @@ import Foundation
 import SudoKeyManager
 
 /// Exported encryption key.
-public struct EncryptionKey {
+public struct EncryptionKey: Equatable {
 
     /// Key ID.
     public let id: String
@@ -36,7 +36,7 @@ public struct EncryptionKey {
 }
 
 /// List of supported symmetric key encryption algorithms.
-public enum SymmetricKeyEncryptionAlgorithm: String {
+public enum SymmetricKeyEncryptionAlgorithm: String, Codable {
     case aesCBCPKCS7Padding = "AES/CBC/PKCS7Padding"
 }
 

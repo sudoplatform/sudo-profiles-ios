@@ -1,6 +1,7 @@
 //  This file was automatically generated and should not be edited.
 
-import AWSAppSync
+import Amplify
+import SudoApiClient
 
 public struct CreateSudoInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap

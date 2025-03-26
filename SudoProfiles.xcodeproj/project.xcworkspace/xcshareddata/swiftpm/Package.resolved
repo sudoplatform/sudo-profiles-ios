@@ -1,0 +1,150 @@
+{
+  "originHash" : "caccf34ae2a2cc282f14dd70bd246d465db91cc314e6693a4c0676c3253f809d",
+  "pins" : [
+    {
+      "identity" : "amplify-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aws-amplify/amplify-swift",
+      "state" : {
+        "revision" : "5b603ff7cfe1b03d753ae7ff9664316e6447f0ae",
+        "version" : "2.46.1"
+      }
+    },
+    {
+      "identity" : "amplify-swift-utils-notifications",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aws-amplify/amplify-swift-utils-notifications.git",
+      "state" : {
+        "revision" : "959eec669ba97c7d923b963c3e66ca8a0b2737f6",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "asn1swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tikhop/ASN1Swift.git",
+      "state" : {
+        "revision" : "403cd95194e6a962e16db7c0d373d89fce83e0f7",
+        "version" : "1.2.7"
+      }
+    },
+    {
+      "identity" : "aws-crt-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/awslabs/aws-crt-swift",
+      "state" : {
+        "revision" : "dd17a98750b6182edacd6e8f0c30aa289c472b22",
+        "version" : "0.40.0"
+      }
+    },
+    {
+      "identity" : "aws-sdk-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/awslabs/aws-sdk-swift",
+      "state" : {
+        "revision" : "9ad12684f6cb9c9b60e840c051a2bba604024650",
+        "version" : "1.0.69"
+      }
+    },
+    {
+      "identity" : "gzipswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/1024jp/GzipSwift",
+      "state" : {
+        "revision" : "7a7f17761c76a932662ab77028a4329f67d645a4",
+        "version" : "5.2.0"
+      }
+    },
+    {
+      "identity" : "smithy-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/smithy-lang/smithy-swift",
+      "state" : {
+        "revision" : "402f091374dcf72c1e7ed43af10e3ee7e634fad8",
+        "version" : "0.106.0"
+      }
+    },
+    {
+      "identity" : "sqlite.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stephencelis/SQLite.swift.git",
+      "state" : {
+        "revision" : "a95fc6df17d108bd99210db5e8a9bac90fe984b8",
+        "version" : "0.15.3"
+      }
+    },
+    {
+      "identity" : "sudo-api-client-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sudoplatform/sudo-api-client-ios",
+      "state" : {
+        "revision" : "63018086b0d45a0fa879788472e0ab73f998af7e",
+        "version" : "13.0.0"
+      }
+    },
+    {
+      "identity" : "sudo-config-manager-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sudoplatform/sudo-config-manager-ios",
+      "state" : {
+        "revision" : "f41f724f41956fd2dfbc61039d381fe33f683750",
+        "version" : "5.0.0"
+      }
+    },
+    {
+      "identity" : "sudo-entitlements-admin-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sudoplatform/sudo-entitlements-admin-ios",
+      "state" : {
+        "revision" : "850a73d74a7f3547171800b04884ade256094ced",
+        "version" : "8.0.0"
+      }
+    },
+    {
+      "identity" : "sudo-entitlements-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sudoplatform/sudo-entitlements-ios",
+      "state" : {
+        "revision" : "b1c1c70397cb0045d77feb6f88ff1fedf185598b",
+        "version" : "13.0.0"
+      }
+    },
+    {
+      "identity" : "sudo-key-manager-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sudoplatform/sudo-key-manager-ios",
+      "state" : {
+        "revision" : "4e101c9d776e1dbcab31d12f6b4824db6bac9c50",
+        "version" : "4.1.1"
+      }
+    },
+    {
+      "identity" : "sudo-logging-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sudoplatform/sudo-logging-ios",
+      "state" : {
+        "revision" : "c1de608ee27bc133cf9657af9c290aa17ec3f133",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "sudo-user-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sudoplatform/sudo-user-ios",
+      "state" : {
+        "revision" : "6ce2d7d0b8125c09bd26f19bf44b8768dbdf65cf",
+        "version" : "18.0.0"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "3d8596ed08bd13520157f0355e35caed215ffbfa",
+        "version" : "1.6.3"
+      }
+    }
+  ],
+  "version" : 3
+}
