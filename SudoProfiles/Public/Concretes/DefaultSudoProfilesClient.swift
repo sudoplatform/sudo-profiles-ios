@@ -316,11 +316,15 @@ public class DefaultSudoProfilesClient: SudoProfilesClient, SudoRepositoryDelega
     // MARK: - Conformance: SudoProfilesClient - Crypto
 
     public func getOwnershipProof(sudo: Sudo, audience: String) async throws -> String {
+        try await getOwnershipProof(sudoId: sudo.id, audience: audience)
+    }
+
+    public func getOwnershipProof(sudoId: String, audience: String) async throws -> String {
         logger.info("Retrieving ownership proof.")
         guard let subject = try await sudoUserClient.getSubject() else {
             throw SudoProfilesClientError.notSignedIn
         }
-        return try await ownershipProofIssuer.getOwnershipProof(ownerId: sudo.id, subject: subject, audience: audience)
+        return try await ownershipProofIssuer.getOwnershipProof(ownerId: sudoId, subject: subject, audience: audience)
     }
 
     public func generateEncryptionKey() throws -> String {

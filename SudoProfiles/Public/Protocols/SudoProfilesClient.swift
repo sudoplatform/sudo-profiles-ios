@@ -86,6 +86,13 @@ public protocol SudoProfilesClient: AnyObject {
     /// - Returns: JSON Web Token representing Sudo ownership proof.
     func getOwnershipProof(sudo: Sudo, audience: String) async throws -> String
 
+    /// Retrieves a signed ownership proof for the Sudo with the specified ID.
+    /// - Parameters:
+    ///   - sudoId: ID of the Sudo to generate an ownership proof for.
+    ///   - audience: Target audience for this proof.
+    /// - Returns: JSON Web Token representing Sudo ownership proof.
+    func getOwnershipProof(sudoId: String, audience: String) async throws -> String
+
     /// Generate an encryption key to use for encrypting Sudo claims. Any existing keys are not removed
     /// to be able to decrypt existing claims but new claims will be encrypted using the newly generated
     /// key.
